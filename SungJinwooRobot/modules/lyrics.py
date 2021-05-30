@@ -5,8 +5,8 @@ from tswift import Song
 from telegram import Bot, Update, Message, Chat
 from telegram.ext import run_async
 
-from Senku import dispatcher
-from Senku.modules.disable import DisableAbleCommandHandler
+from SungJinwooRobot import dispatcher
+from SungJinwooRobot.modules.disable import DisableAbleCommandHandler
 
 
 @run_async
