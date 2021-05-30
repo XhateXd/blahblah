@@ -63,5 +63,4 @@ pybase64
 pySmartDL
 validators
 youtube_search
-requests
 aiohttp
