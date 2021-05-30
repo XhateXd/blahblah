@@ -60,9 +60,9 @@ def no_longer_afk(update: Update, context: CallbackContext):
                 '{} is here!', '{} is back!', '{} is now in the chat!',
                '{} is here! start the show!', '{} ahem! my love is here!', 
            '{} damn... I saw you were online.. reading the messages.. but u were afk.'
-               ]
-
-         chosen_option = random.choice(options)
+               
+            ]
+            chosen_option = random.choice(options)
             update.effective_message.reply_text(chosen_option.format(firstname))
         except:
             return
