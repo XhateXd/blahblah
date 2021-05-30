@@ -13,8 +13,8 @@ from pySmartDL import SmartDL
 from telethon.tl.types import DocumentAttributeVideo, DocumentAttributeAudio
 from telethon import events
 
-from KURUMIBOT.events import register
-from KURUMIBOT.utils import progress
+from SungJinwooRobot.events import register
+from SungJinwooRobot.utils import progress
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 from validators.url import url
@@ -319,9 +319,9 @@ def lyrics(update: Update, context: CallbackContext):
 	
 	
 __help__ = """
- ➩ /song <songname artist(optional)>: uploads the song in it's best quality available
- ➩ /video <songname artist(optional)>: uploads the video song in it's best quality available
-
+- /song <songname artist(optional)>: uploads the song.
+- /video <songname artist(optional)>: uploads the video song.
+- /lyrics <song>: Gives you the lyrics of that song.
 """
 
 __mod_name__ = "Music"
