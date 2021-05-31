@@ -2,37 +2,50 @@ import html
 
 from SungJinwooRobot import ALLOW_EXCL, CustomCommandHandler, dispatcher
 from SungJinwooRobot.modules.disable import DisableAbleCommandHandler
-from SungJinwoo.modules.helper_funcs.chat_status import (bot_can_delete,
-                                                           connection_status,
-                                                           dev_plus, user_admin)
+from SungJinwooRobot.modules.helper_funcs.chat_status import (
+    bot_can_delete,
+    connection_status,
+    dev_plus,
+    user_admin,
+)
 from SungJinwooRobot.modules.sql import cleaner_sql as sql
 from telegram import ParseMode, Update
-from telegram.ext import (CallbackContext, CommandHandler, Filters,
-                          MessageHandler, run_async)
+from telegram.ext import (
+    CallbackContext,
+    CommandHandler,
+    Filters,
+    MessageHandler,
+    run_async,
+)
 
 if ALLOW_EXCL:
-    CMD_STARTERS = ('/', '!')
+    CMD_STARTERS = ("/", "!")
 else:
-    CMD_STARTERS = ('/')
+    CMD_STARTERS = "/"
 
 BLUE_TEXT_CLEAN_GROUP = 13
-CommandHandlerList = (CommandHandler, CustomCommandHandler,
-                      DisableAbleCommandHandler)
+CommandHandlerList = (CommandHandler, CustomCommandHandler, DisableAbleCommandHandler)
 command_list = [
-    "cleanblue", "ignoreblue", "unignoreblue", "listblue", "ungignoreblue",
-    "gignoreblue"
-    "start", "help", "settings", "donate", "stalk", "aka", "leaderboard"
+    "cleanblue",
+    "ignoreblue",
+    "unignoreblue",
+    "listblue",
+    "ungignoreblue",
+    "gignoreblue" "start",
+    "help",
+    "settings",
+    "donate",
+    "stalk",
+    "aka",
+    "leaderboard",
 ]
 
 for handler_list in dispatcher.handlers:
     for handler in dispatcher.handlers[handler_list]:
-        if any(
-                isinstance(handler, cmd_handler)
-                for cmd_handler in CommandHandlerList):
+        if any(isinstance(handler, cmd_handler) for cmd_handler in CommandHandlerList):
             command_list += handler.command
 
 
-@run_async
 def clean_blue_text_must_click(update: Update, context: CallbackContext):
     bot = context.bot
     chat = update.effective_chat
@@ -42,9 +55,10 @@ def clean_blue_text_must_click(update: Update, context: CallbackContext):
             fst_word = message.text.strip().split(None, 1)[0]
 
             if len(fst_word) > 1 and any(
-                    fst_word.startswith(start) for start in CMD_STARTERS):
+                fst_word.startswith(start) for start in CMD_STARTERS
+            ):
 
-                command = fst_word[1:].split('@')
+                command = fst_word[1:].split("@")
                 chat = update.effective_chat
 
                 ignored = sql.is_command_ignored(chat.id, command[0])
@@ -55,7 +69,6 @@ def clean_blue_text_must_click(update: Update, context: CallbackContext):
                     message.delete()
 
 
-@run_async
 @connection_status
 @bot_can_delete
 @user_admin
@@ -65,16 +78,18 @@ def set_blue_text_must_click(update: Update, context: CallbackContext):
     bot, args = context.bot, context.args
     if len(args) >= 1:
         val = args[0].lower()
-        if val in ('off', 'no'):
+        if val in ("off", "no"):
             sql.set_cleanbt(chat.id, False)
             reply = "Bluetext cleaning has been disabled for <b>{}</b>".format(
-                html.escape(chat.title))
+                html.escape(chat.title)
+            )
             message.reply_text(reply, parse_mode=ParseMode.HTML)
 
-        elif val in ('yes', 'on'):
+        elif val in ("yes", "on"):
             sql.set_cleanbt(chat.id, True)
             reply = "Bluetext cleaning has been enabled for <b>{}</b>".format(
-                html.escape(chat.title))
+                html.escape(chat.title)
+            )
             message.reply_text(reply, parse_mode=ParseMode.HTML)
 
         else:
@@ -87,11 +102,11 @@ def set_blue_text_must_click(update: Update, context: CallbackContext):
         else:
             clean_status = "Disabled"
         reply = "Bluetext cleaning for <b>{}</b> : <b>{}</b>".format(
-            html.escape(chat.title), clean_status)
+            chat.title, clean_status
+        )
         message.reply_text(reply, parse_mode=ParseMode.HTML)
 
 
-@run_async
 @user_admin
 def add_bluetext_ignore(update: Update, context: CallbackContext):
     message = update.effective_message
@@ -102,7 +117,8 @@ def add_bluetext_ignore(update: Update, context: CallbackContext):
         added = sql.chat_ignore_command(chat.id, val)
         if added:
             reply = "<b>{}</b> has been added to bluetext cleaner ignore list.".format(
-                args[0])
+                args[0]
+            )
         else:
             reply = "Command is already ignored."
         message.reply_text(reply, parse_mode=ParseMode.HTML)
@@ -112,7 +128,6 @@ def add_bluetext_ignore(update: Update, context: CallbackContext):
         message.reply_text(reply)
 
 
-@run_async
 @user_admin
 def remove_bluetext_ignore(update: Update, context: CallbackContext):
     message = update.effective_message
@@ -122,8 +137,11 @@ def remove_bluetext_ignore(update: Update, context: CallbackContext):
         val = args[0].lower()
         removed = sql.chat_unignore_command(chat.id, val)
         if removed:
-            reply = "<b>{}</b> has been removed from bluetext cleaner ignore list.".format(
-                args[0])
+            reply = (
+                "<b>{}</b> has been removed from bluetext cleaner ignore list.".format(
+                    args[0]
+                )
+            )
         else:
             reply = "Command isn't ignored currently."
         message.reply_text(reply, parse_mode=ParseMode.HTML)
@@ -133,7 +151,6 @@ def remove_bluetext_ignore(update: Update, context: CallbackContext):
         message.reply_text(reply)
 
 
-@run_async
 @user_admin
 def add_bluetext_ignore_global(update: Update, context: CallbackContext):
     message = update.effective_message
@@ -143,7 +160,8 @@ def add_bluetext_ignore_global(update: Update, context: CallbackContext):
         added = sql.global_ignore_command(val)
         if added:
             reply = "<b>{}</b> has been added to global bluetext cleaner ignore list.".format(
-                args[0])
+                args[0]
+            )
         else:
             reply = "Command is already ignored."
         message.reply_text(reply, parse_mode=ParseMode.HTML)
@@ -153,7 +171,6 @@ def add_bluetext_ignore_global(update: Update, context: CallbackContext):
         message.reply_text(reply)
 
 
-@run_async
 @dev_plus
 def remove_bluetext_ignore_global(update: Update, context: CallbackContext):
     message = update.effective_message
@@ -163,7 +180,8 @@ def remove_bluetext_ignore_global(update: Update, context: CallbackContext):
         removed = sql.global_unignore_command(val)
         if removed:
             reply = "<b>{}</b> has been removed from global bluetext cleaner ignore list.".format(
-                args[0])
+                args[0]
+            )
         else:
             reply = "Command isn't ignored currently."
         message.reply_text(reply, parse_mode=ParseMode.HTML)
@@ -173,7 +191,6 @@ def remove_bluetext_ignore_global(update: Update, context: CallbackContext):
         message.reply_text(reply)
 
 
-@run_async
 @dev_plus
 def bluetext_ignore_list(update: Update, context: CallbackContext):
 
@@ -203,31 +220,40 @@ def bluetext_ignore_list(update: Update, context: CallbackContext):
     message.reply_text(text, parse_mode=ParseMode.HTML)
     return
 
+from tg_bot.modules.language import gs
 
-__help__ = """
-Blue text cleaner removed any made up commands that people send in your chat.
- • `/cleanblue <on/off/yes/no>`*:* clean commands after sending
- • `/ignoreblue <word>`*:* prevent auto cleaning of the command
- • `/unignoreblue <word>`*:* remove prevent auto cleaning of the command
- • `/listblue`*:* list currently whitelisted commands
- 
- *Following are Disasters only commands, admins cannot use these:*
- • `/gignoreblue <word>`*:* globally ignorea bluetext cleaning of saved word across Saitama.
- • `/ungignoreblue <word>`*:* remove said command from global cleaning list
-"""
+def get_help(chat):
+    return gs(chat, "cleaner_help")
 
-SET_CLEAN_BLUE_TEXT_HANDLER = CommandHandler("cleanblue",
-                                             set_blue_text_must_click)
-ADD_CLEAN_BLUE_TEXT_HANDLER = CommandHandler("ignoreblue", add_bluetext_ignore)
-REMOVE_CLEAN_BLUE_TEXT_HANDLER = CommandHandler("unignoreblue",
-                                                remove_bluetext_ignore)
-ADD_CLEAN_BLUE_TEXT_GLOBAL_HANDLER = CommandHandler("gignoreblue",
-                                                    add_bluetext_ignore_global)
+SET_CLEAN_BLUE_TEXT_HANDLER = CommandHandler(
+    "cleanbluetext", set_blue_text_must_click, pass_args=True, run_async=True
+)
+ADD_CLEAN_BLUE_TEXT_HANDLER = CommandHandler(
+    "ignorecleanbluetext", add_bluetext_ignore, pass_args=True, run_async=True
+)
+REMOVE_CLEAN_BLUE_TEXT_HANDLER = CommandHandler(
+    "unignorecleanbluetext", remove_bluetext_ignore, pass_args=True, run_async=True
+)
+ADD_CLEAN_BLUE_TEXT_GLOBAL_HANDLER = CommandHandler(
+    "ignoreglobalcleanbluetext",
+    add_bluetext_ignore_global,
+    pass_args=True,
+    run_async=True,
+)
 REMOVE_CLEAN_BLUE_TEXT_GLOBAL_HANDLER = CommandHandler(
-    "ungignoreblue", remove_bluetext_ignore_global)
-LIST_CLEAN_BLUE_TEXT_HANDLER = CommandHandler("listblue", bluetext_ignore_list)
-CLEAN_BLUE_TEXT_HANDLER = MessageHandler(Filters.command & Filters.group,
-                                         clean_blue_text_must_click)
+    "unignoreglobalcleanbluetext",
+    remove_bluetext_ignore_global,
+    pass_args=True,
+    run_async=True,
+)
+LIST_CLEAN_BLUE_TEXT_HANDLER = CommandHandler(
+    "listcleanbluetext", bluetext_ignore_list, run_async=True
+)
+CLEAN_BLUE_TEXT_HANDLER = MessageHandler(
+    Filters.command & Filters.chat_type.groups,
+    clean_blue_text_must_click,
+    run_async=True,
+)
 
 dispatcher.add_handler(SET_CLEAN_BLUE_TEXT_HANDLER)
 dispatcher.add_handler(ADD_CLEAN_BLUE_TEXT_HANDLER)
@@ -237,10 +263,13 @@ dispatcher.add_handler(REMOVE_CLEAN_BLUE_TEXT_GLOBAL_HANDLER)
 dispatcher.add_handler(LIST_CLEAN_BLUE_TEXT_HANDLER)
 dispatcher.add_handler(CLEAN_BLUE_TEXT_HANDLER, BLUE_TEXT_CLEAN_GROUP)
 
-__mod_name__ = "Bluetext Cleaning"
+__mod_name__ = "Cleaner"
 __handlers__ = [
-    SET_CLEAN_BLUE_TEXT_HANDLER, ADD_CLEAN_BLUE_TEXT_HANDLER,
-    REMOVE_CLEAN_BLUE_TEXT_HANDLER, ADD_CLEAN_BLUE_TEXT_GLOBAL_HANDLER,
-    REMOVE_CLEAN_BLUE_TEXT_GLOBAL_HANDLER, LIST_CLEAN_BLUE_TEXT_HANDLER,
-    (CLEAN_BLUE_TEXT_HANDLER, BLUE_TEXT_CLEAN_GROUP)
+    SET_CLEAN_BLUE_TEXT_HANDLER,
+    ADD_CLEAN_BLUE_TEXT_HANDLER,
+    REMOVE_CLEAN_BLUE_TEXT_HANDLER,
+    ADD_CLEAN_BLUE_TEXT_GLOBAL_HANDLER,
+    REMOVE_CLEAN_BLUE_TEXT_GLOBAL_HANDLER,
+    LIST_CLEAN_BLUE_TEXT_HANDLER,
+    (CLEAN_BLUE_TEXT_HANDLER, BLUE_TEXT_CLEAN_GROUP),
 ]
