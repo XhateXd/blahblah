@@ -19,6 +19,7 @@ import asyncio
 from typing import Callable, Coroutine, Dict, List, Tuple, Union
 import sys
 import time
+from SungJinwooRobot.utils.dur import DurationLimitError
 
 aiohttpsession = aiohttp.ClientSession()
 chat_id = None
