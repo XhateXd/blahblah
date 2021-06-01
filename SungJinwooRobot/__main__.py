@@ -88,8 +88,9 @@ buttons = [
         InlineKeyboardButton(text=" ⚙COMMANDS", callback_data="help_back"),
     ],
     [
-        InlineKeyboardButton(
-            text="🚨Support", url="https://t.me/myawesomebot21"),
+        InlineKeyboardButton(text="🚨Support", url="https://t.me/myawesomebot21"),
+        InlineKeyboardButton(text="❗Updates", url="https://t.me/senkubotupdates"),
+   
     ], 
 ]
 
