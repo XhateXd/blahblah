@@ -395,3 +395,4 @@ __mod_name__ = "Songs"
 __help__ = """
 `/song` : gives a song you want. 
 `/video` : gives mp4 of a song. 
+"""
