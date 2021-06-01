@@ -64,5 +64,5 @@ pySmartDL
 validators
 youtube_search
 cloudscraper
-
+python-arq
 
