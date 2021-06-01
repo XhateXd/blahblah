@@ -393,6 +393,7 @@ async def ytmusic(client,message: Message):
 __mod_name__ = "Songs"
 
 __help__ = """
-`/song` : gives a song you want. 
-`/video` : gives mp4 of a song. 
+`/song <song>` : gives a song you want. 
+`/video <song>` : gives mp4 of a song. 
+'/lyrics <song>: returns the lyrics of that song.
 """
