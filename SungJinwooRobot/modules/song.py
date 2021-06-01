@@ -27,7 +27,7 @@ chat_id = None
 arq = ARQ("https://thearq.tech", "AFMJDA-MQSBCE-RNSVHB-WUVNVP-ARQ", aiohttpsession)
 
 
-@Client.on_message(filters.command('song') & ~filters.private & ~filters.channel)
+@Client.on_message(filters.command('song') & ~filters.channel)
 def song(client, message):
 
     user_id = message.from_user.id 
