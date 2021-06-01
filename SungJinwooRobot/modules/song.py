@@ -19,7 +19,6 @@ import asyncio
 from typing import Callable, Coroutine, Dict, List, Tuple, Union
 import sys
 import time
-from helpers.errors import DurationLimitError
 
 aiohttpsession = aiohttp.ClientSession()
 chat_id = None
@@ -82,11 +81,6 @@ def song(client, message):
         os.remove(thumb_name)
     except Exception as e:
         print(e)
-
-ARQ_API = "http://35.240.133.234:8000"
-api_key = "NZWDAY-TVOXNH-BWRUTE-WGQGLG-ARQ"
-arq = ARQ(ARQ_API, api_key)
-
 
 def get_text(message: Message) -> [None, str]:
     text_to_return = message.text
