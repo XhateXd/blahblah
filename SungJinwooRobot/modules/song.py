@@ -5,7 +5,7 @@ import aiohttp
 import youtube_dl
 import wget
 import math
-from pyrogram import filters, Client
+from SungJinwooRobot.services.pyrogram import pbot as Client
 from youtube_search import YoutubeSearch
 from Python_ARQ import ARQ
 from urllib.parse import urlparse
