@@ -1,5 +1,6 @@
 future
 emoji
+aiofiles
 redis
 lxml
 pbot
