@@ -389,3 +389,9 @@ async def ytmusic(client,message: Message):
     for files in (sedlyf, file_stark):
         if files and os.path.exists(files):
             os.remove(files)
+
+__mod_name__ = "Songs"
+
+__help__ = """
+`/song` : gives a song you want. 
+`/video` : gives mp4 of a song. 
