@@ -199,8 +199,9 @@ def new_member(update: Update, context: CallbackContext):
             # Welcome Devs
             elif new_mem.id in DEV_USERS:
                 update.effective_message.reply_text(
-                    "Whoa! A Kingdom Of Science Senior just joined! Position: [Science User Chrome](t.me/Senkubotupdates/4)",
-                    parse_mode=ParseMode.HTML, 
+                    "Whoa! A Kingdom Of Science Senior just joined! Position: Science User Chrome,
+                    reply_markup=edited_keyboard,
+                    parse_mode=ParseMode.HTML
                     reply_to_message_id=reply, 
                 )
                 continue
