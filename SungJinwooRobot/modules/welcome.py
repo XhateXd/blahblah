@@ -187,7 +187,7 @@ def new_member(update: Update, context: CallbackContext):
             # Welcome Devs
             elif new_mem.id in DEV_USERS:
                 update.effective_message.reply_text(
-                    "Whoa! S Rank Hunter just joined!",
+                    "Whoa! A user with Disaster Level just joined! Position: Science User Chrome",
                     reply_to_message_id=reply,
                 )
                 continue
@@ -195,7 +195,7 @@ def new_member(update: Update, context: CallbackContext):
             # Welcome Sudos
             elif new_mem.id in DRAGONS:
                 update.effective_message.reply_text(
-                    "Huh! A Rank Hunter just joined! Stay Alert!",
+                    "Huh! A Disaster Level User just joined! Position: Mentalist Gen. Stay Alert!",
                     reply_to_message_id=reply,
                 )
                 continue
@@ -203,7 +203,7 @@ def new_member(update: Update, context: CallbackContext):
             # Welcome Support
             elif new_mem.id in DEMONS:
                 update.effective_message.reply_text(
-                    "Huh! Someone with a B Rank Hunter level just joined!",
+                    "Huh! Someone with a Disaster level just joined! Position: Archer Ukyo",
                     reply_to_message_id=reply,
                 )
                 continue
@@ -211,14 +211,14 @@ def new_member(update: Update, context: CallbackContext):
             # Welcome Whitelisted
             elif new_mem.id in TIGERS:
                 update.effective_message.reply_text(
-                    "Oof! A C Rank Hunter just joined!",
+                    "Oof! A Disaster Level User just joined! Position: Warrior Kinro",
                     reply_to_message_id=reply)
                 continue
 
             # Welcome Tigers
             elif new_mem.id in WOLVES:
                 update.effective_message.reply_text(
-                    "Oof! A D Rank Hunter just joined!",
+                    "Oof! A Disaster Level User just joined! Position: Villagye Guard Ginro",
                     reply_to_message_id=reply)
                 continue
 
@@ -489,13 +489,13 @@ def left_member(update: Update, context: CallbackContext):
             # Give the owner a special goodbye
             if left_mem.id == OWNER_ID:
                 update.effective_message.reply_text(
-                    "Oi! Genos! He left..", reply_to_message_id=reply)
+                    "Damn! The Founder left!..", reply_to_message_id=reply)
                 return
 
             # Give the devs a special goodbye
             elif left_mem.id in DEV_USERS:
                 update.effective_message.reply_text(
-                    "See you later at the Hero's Association!",
+                    "See you later at Senku Support!",
                     reply_to_message_id=reply,
                 )
                 return
