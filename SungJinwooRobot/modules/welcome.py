@@ -174,6 +174,18 @@ def new_member(update: Update, context: CallbackContext):
                     pass
                 reply = False
 
+
+                edited_keyboard = InlineKeyboardMarkup(
+                    [
+                        [
+                            InlineKeyboardButton(
+                                text="More Information", url="t.me/senkubotupdates/4"
+                            )
+                        ]
+                    ]
+                    )
+
+
             # Give the owner a special welcome
             if new_mem.id == OWNER_ID:
                 update.effective_message.reply_text(
@@ -187,8 +199,8 @@ def new_member(update: Update, context: CallbackContext):
             # Welcome Devs
             elif new_mem.id in DEV_USERS:
                 update.effective_message.reply_text(
-                    "Whoa! A Kingdom Of Science Senior just joined! Position: [Science User Chrome](t.me/SenkubotUpdates/4)",
-                    parse_mode=ParseMode.MARKDOWN, 
+                    "Whoa! A Kingdom Of Science Senior just joined! Position: [Science User Chrome](t.me/Senkubotupdates/4)",
+                    parse_mode=ParseMode.HTML, 
                     reply_to_message_id=reply, 
                 )
                 continue
