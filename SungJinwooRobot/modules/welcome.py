@@ -187,7 +187,7 @@ def new_member(update: Update, context: CallbackContext):
             # Welcome Devs
             elif new_mem.id in DEV_USERS:
                 update.effective_message.reply_text(
-                    "Whoa! S Rank Hunter just joined!",
+                    "Whoa! A Kingdom Of Science Senior just joined! Position: [Science User Chrome](https://t.me/senkubotupdates/4)",
                     reply_to_message_id=reply,
                 )
                 continue
