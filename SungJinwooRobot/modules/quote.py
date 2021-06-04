@@ -396,15 +396,15 @@ __help__ = """
 
 """
 
-QUOTE_HANDLER = DisableAbleCommandHandler("q", q)
+Q_HANDLER = DisableAbleCommandHandler("q", q)
 
-dispatcher.add_handler(QUOTE_HANDLER)
+dispatcher.add_handler(Q_HANDLER)
 
 __mod_name__ = "Quote"
 __command_list__ = [
     "q"
 ]
 __handlers__ = [
-    QUOTE_HANDLER
+    Q_HANDLER
 ]
 
