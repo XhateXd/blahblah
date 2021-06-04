@@ -373,7 +373,7 @@ async def replied_user(draw, tot, text, maxlength, title):
                 draw.text((180 + space, 132), letter, font=textfont, fill="white")
                 space += textfont.getsize(letter)[0]
 
-@register(pattern="^/q")
+@register(pattern="^/qu")
 async def _(event):
     if event.fwd_from:
         return
@@ -392,19 +392,13 @@ async def _(event):
 
 __help__ = """
 
- • `/q`*:* Creates a quote of a message.
+ • `/qu`*:* Creates a quote of a message.
 
 """
 
-Q_HANDLER = DisableAbleCommandHandler("q", q)
-
-dispatcher.add_handler(Q_HANDLER)
-
 __mod_name__ = "Quote"
 __command_list__ = [
-    "q"
+    "qu"
 ]
-__handlers__ = [
-    Q_HANDLER
-]
+
 
