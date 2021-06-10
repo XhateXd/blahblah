@@ -385,14 +385,14 @@ async def inuka(client, message):
 
 
 __help__ = """
-<b> Chatbot </b>
+ **Chatbot**
 
 
  - /chatbot [ON/OFF]: Enables and disables AI Chat mode (EXCLUSIVE)
  - /chatbot EN : Enables English only chatbot
  
  
-<b> Assistant </b>
+ ZzAssistant**
  - /ask [question]: Ask question from Senku
  - /ask [reply to voice note]: Get voice reply
  
