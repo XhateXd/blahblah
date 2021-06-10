@@ -69,3 +69,4 @@ python-arq
 fontTools
 google_trans_new
 asyncio
+pykeyboard
