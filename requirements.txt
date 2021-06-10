@@ -70,3 +70,4 @@ fontTools
 google_trans_new
 asyncio
 pykeyboard
+search_engine_parser
