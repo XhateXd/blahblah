@@ -31,7 +31,8 @@ from SungJinwooRobot import BOT_ID
 from SungJinwooRobot.db.mongo_helpers.aichat import add_chat, get_session, remove_chat
 from SungJinwooRobot.function.inlinehelper import arq
 from SungJinwooRobot.function.pluginhelpers import admins_only, edit_or_reply
-from SungJinwooRobot.services.pyrogram import pbot as SungJinwooRobot
+from SungJinwooRobot.services.pyrogram import pbot as senku
+
 
 translator = google_translator()
 
@@ -64,7 +65,7 @@ senku_chats = []
 en_chats = []
 # AI Chat (C) 2020-2021 by @InukaAsith
 """
-@SungJinwooRobot.on_message(
+@senku.on_message(
     filters.voice & filters.reply & ~filters.bot & ~filters.via_bot & ~filters.forwarded,
     group=2,
 )
@@ -96,7 +97,7 @@ async def hmm(client, message):
 """
 
 
-@SungJinwooRobot.on_message(
+@senku.on_message(
     filters.command("chatbot") & ~filters.edited & ~filters.bot & ~filters.private
 )
 @admins_only
@@ -142,7 +143,7 @@ async def hmm(_, message):
         )
 
 
-@SungJinwooRobot.on_message(
+@senku.on_message(
     filters.text
     & filters.reply
     & ~filters.bot
@@ -244,7 +245,7 @@ async def hmm(client, message):
             return
 
 
-@SungJinwooRobot.on_message(
+@senku.on_message(
     filters.text & filters.private & ~filters.edited & filters.reply & ~filters.bot
 )
 async def inuka(client, message):
@@ -310,7 +311,7 @@ async def inuka(client, message):
         return
 
 
-@SungJinwooRobot.on_message(
+@senku.on_message(
     filters.regex("Senku|senku|senkubot|SenkuBot|Senkubot")
     & ~filters.bot
     & ~filters.via_bot
@@ -397,4 +398,4 @@ __help__ = """
  
 """
 
-__mod_name__ = "AI Assistant"
+__mod_name__ = "AI Chat"
