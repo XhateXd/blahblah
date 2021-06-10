@@ -65,7 +65,7 @@ pySmartDL
 validators
 youtube_search
 cloudscraper
-python-arq
+Python_ARQ
 fontTools
 google_trans_new
 asyncio
