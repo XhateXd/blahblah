@@ -389,13 +389,8 @@ __help__ = """
 
 
  - /chatbot [ON/OFF]: Enables and disables AI Chat mode (EXCLUSIVE)
- - /chatbot EN : Enables English only chatbot
- 
- 
- ZzAssistant**
- - /ask [question]: Ask question from Senku
- - /ask [reply to voice note]: Get voice reply
- 
+ - /chatbot EN : Enables English only Chatbot.
+
 """
 
 __mod_name__ = "AI Chat"
