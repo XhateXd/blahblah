@@ -10,7 +10,7 @@ from PIL import Image, ImageDraw, ImageOps
 
 from SungJinwooRobot.config import get_str_key
 
-RemoveBG_API = get_str_key("REM_BG_API_KEY", required=True)
+RemoveBG_API = get_str_key("REM_BG_API_KEY", required=False)
 
 
 async def rotate_90(client, message):
