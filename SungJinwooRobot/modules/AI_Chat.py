@@ -393,4 +393,4 @@ __help__ = """
 
 """
 
-__mod_name__ = "AI Chat"
+__mod_name__ = "Chatbot"
