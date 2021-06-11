@@ -27,6 +27,8 @@ import aiohttp
 from google_trans_new import google_translator
 from pyrogram import filters
 
+from coffeehouse.exception import CoffeeHouseError as CFError
+
 from SungJinwooRobot import BOT_ID
 from SungJinwooRobot.db.mongo_helpers.aichat import add_chat, get_session, remove_chat
 from SungJinwooRobot.function.inlinehelper import arq
