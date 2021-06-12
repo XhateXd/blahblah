@@ -40,7 +40,7 @@ from Python_ARQ import ARQ
 
 aiohttpsession = aiohttp.ClientSession()
 chat_id = None
-arq = ARQ("https://thearq.tech",AFMJDA-MQSBCE-RNSVHB-WUVNVP-ARQ, aiohttpsession)
+arq = ARQ("https://thearq.tech", "AFMJDA-MQSBCE-RNSVHB-WUVNVP-ARQ", aiohttpsession)
 DISABLED_GROUPS = []
 useer ="NaN"
 
