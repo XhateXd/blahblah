@@ -36,7 +36,8 @@ from youtube_search import YoutubeSearch
 from youtubesearchpython import SearchVideos
 
 from SungJinwooRobot.config import DURATION_LIMIT
-from SungJinwooRobot.modules.play import arq
+from Python_ARQ import ARQ
+
 
 
 @Client.on_message(filters.command("song") & ~filters.channel)
