@@ -30,8 +30,6 @@ command_list = [
     "ignoreblue",
     "unignoreblue",
     "listblue",
-    "ungignoreblue",
-    "gignoreblue" "start",
     "help",
     "settings",
     "donate",
@@ -151,14 +149,14 @@ def remove_bluetext_ignore(update: Update, context: CallbackContext):
         message.reply_text(reply)
 
 
-@user_admin
+@dev_plus
 def add_bluetext_ignore_global(update: Update, context: CallbackContext):
     message = update.effective_message
     args = context.args
     if len(args) >= 1:
         val = args[0].lower()
         added = sql.global_ignore_command(val)
-        if added:
+       if added:
             reply = "<b>{}</b> has been added to global bluetext cleaner ignore list.".format(
                 args[0]
             )
