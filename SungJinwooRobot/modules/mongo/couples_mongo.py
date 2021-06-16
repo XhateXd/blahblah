@@ -1,4 +1,4 @@
-from SungJinwooRobot import db
+from SungJinwooRobot.mongo import db
 from typing import Dict, List, Union
 
 
