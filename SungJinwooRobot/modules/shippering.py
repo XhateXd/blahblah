@@ -5,10 +5,10 @@ from pyrogram import filters
 
 from SungJinwooRobot import pbot as app
 from SungJinwooRobot.utils.errors import capture_err
-from SungJinwooRobot.utils.dbfunctions import get_couple, save_couple
+from SungJinwooRobot.modules.mongo.couples_mongo import get_couple, save_couple
 
 __mod_name__ = "Shippering"
-__help__ = "/couples - To Choose The Couple Of The Day"
+__help__ = "`/couples` - To Choose Couple Of The Day"
 
 
 # Date and time
