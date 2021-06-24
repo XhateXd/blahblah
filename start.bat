@@ -1,4 +1,4 @@
 @echo off
-TITLE Sung Jin- Woo Robot
-:: Enables virtual env mode and then starts saitama
-env\scripts\activate.bat && py -m SungJinwooRobot
+TITLE Petra Robot
+:: Enables virtual env mode and then starts Petra
+env\scripts\activate.bat && py -m Petra
