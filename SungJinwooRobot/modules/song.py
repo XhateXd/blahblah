@@ -12,7 +12,7 @@ from tswift import Song
 from youtube_dl import YoutubeDL
 from youtubesearchpython import SearchVideos
 
-from LaylaRobot.conf import get_str_key
+from SungJinwooRobot.config import get_str_key
 from LaylaRobot.pyrogramee.pluginshelper import get_text, progress
 from LaylaRobot import pbot
 
