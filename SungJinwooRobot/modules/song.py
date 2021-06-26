@@ -13,7 +13,7 @@ from youtube_dl import YoutubeDL
 from youtubesearchpython import SearchVideos
 
 from SungJinwooRobot.config import get_str_key
-from SungJinwooRobot.function.pluginshelper import get_text, progress
+from SungJinwooRobot.function.pluginhelpers import get_text, progress
 from SungJinwooRobot import pbot
 
 GENIUS = get_str_key("GENIUS_API_TOKEN", None)
