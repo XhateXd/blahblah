@@ -50,7 +50,7 @@ async def get_reputation_count() -> dict:
 async def get_reputation(chat_id: int) -> Dict[str, int]:
     reputation = await repdb.find_one({"chat_id": chat_id})
     if reputation:
-        reputation = reputation["reputation"]
+         reputation = reputation['reputation']
     else:
         reputation = {}
     return reputation
@@ -63,13 +63,20 @@ async def get_reputation(chat_id: int, name: str) -> Union[bool, dict]:
         return reputation[name]
 
 
-async def update_reputation(chat_id: int, name: str, karma: dict):
+async def update_reputation(chat_id: int, name: str, reputation: dict):
     name = name.lower().strip()
     reputation = await get_reputation(chat_id)
     reputation[name] = reputation
     await repdb.update_one(
-        {"chat_id": chat_id}, {"$set": {"reputation": reputation}}, upsert=True
+        {"chat_id": chat_id},
+        {
+            "$set": {
+                "reputation": reputation
+            }
+        },
+        upsert=True
     )
+
 
 
 _mod_name_ = "Reputation"
