@@ -1,7 +1,7 @@
 # Ported From WilliamButcher Bot.
 # Credits Goes to WilliamButcherBot
 
-from typing import Dict, Union
+from typing import Dict, Union, List
 
 from pyrogram import filters
 
