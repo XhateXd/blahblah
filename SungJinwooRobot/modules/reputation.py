@@ -91,7 +91,7 @@ Send /reputation without replying to any message to check reputation list of top
 regex_upvote = r"^((?i)\+|\+\+|\+1|thx|tnx|ty|thank you|thanx|thanks|pro|cool|good|👍)$"
 regex_downvote = r"^(\-|\-\-|\-1|👎)$"
 
-
+@user_admin
 @app.on_message(
     filters.text
     & filters.group
@@ -104,8 +104,9 @@ regex_downvote = r"^(\-|\-\-|\-1|👎)$"
     group=reputation_positive_group,
 )
 
+@run_async
 @user_admin
-async def upvote(_, message):
+def upvote(_, message):
 
     if not await is_reputation_on(message.chat.id):
         return
@@ -134,7 +135,7 @@ async def upvote(_, message):
         f"Incremented Reputation of {user_mention} By 1 \nTotal Points: {reputation}"
     )
 
-
+@user_admin
 @app.on_message(
     filters.text
     & filters.group
@@ -147,8 +148,9 @@ async def upvote(_, message):
     group=reputation_negative_group,
 )
 
+@run_async
 @user_admin
-async def downvote(_, message):
+def downvote(_, message):
 
     if not await is_reputation_on(message.chat.id):
         return
