@@ -9,6 +9,7 @@ from SungJinwooRobot.db.mongo_helpers.reputation import is_reputation_on, reputa
 from SungJinwooRobot.function.pluginhelpers import member_permissions
 from SungJinwooRobot.services.mongo2 import db
 from SungJinwooRobot.services.pyrogram import pbot as app
+from SungJinwooRobot.modules.helper_funcs.chat_status import user_admin
 
 repdb = db.rep
 reputation_positive_group = 3
@@ -102,6 +103,8 @@ regex_downvote = r"^(\-|\-\-|\-1|👎)$"
     & ~filters.edited,
     group=reputation_positive_group,
 )
+
+@user_admin
 async def upvote(_, message):
 
     if not await is_reputation_on(message.chat.id):
@@ -143,6 +146,8 @@ async def upvote(_, message):
     & ~filters.edited,
     group=reputation_negative_group,
 )
+
+@user_admin
 async def downvote(_, message):
 
     if not await is_reputation_on(message.chat.id):
