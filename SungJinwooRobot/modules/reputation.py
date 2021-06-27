@@ -34,20 +34,20 @@ async def alpha_to_int(user_id_alphabet: str) -> int:
     return user_id
 
 
-async def get_reputation_count() -> dict:
+async def get_reputations_count() -> dict:
     chats = repdb.find({"chat_id": {"$lt": 0}})
     if not chats:
         return {}
     chats_count = 0
-    reputation_count = 0
+    reputations_count = 0
     for chat in await chats.to_list(length=1000000):
         for i in chat["reputation"]:
-            reputation_count += chat["reputation"][i]["reputation"]
+            reputations_count += chat["reputation"][i]["reputation"]
         chats_count += 1
-    return {"chats_count": chats_count, "reputation_count": reputation_count}
+    return {"chats_count": chats_count, "reputations_count": reputations_count}
 
 
-async def get_reputation(chat_id: int) -> Dict[str, int]:
+async def get_reputations(chat_id: int) -> Dict[str, int]:
     reputation = await repdb.find_one({"chat_id": chat_id})
     if reputation:
          reputation = reputation['reputation']
@@ -58,20 +58,20 @@ async def get_reputation(chat_id: int) -> Dict[str, int]:
 
 async def get_reputation(chat_id: int, name: str) -> Union[bool, dict]:
     name = name.lower().strip()
-    reputation = await get_reputation(chat_id)
-    if name in reputation:
-        return reputation[name]
+    reputations = await get_reputations(chat_id)
+    if name in reputations:
+        return reputations[name]
 
 
 async def update_reputation(chat_id: int, name: str, reputation: dict):
     name = name.lower().strip()
-    reputation = await get_reputation(chat_id)
-    reputation[name] = reputation
+    reputations = await get_reputations(chat_id)
+    reputations[name] = reputation
     await repdb.update_one(
         {"chat_id": chat_id},
         {
             "$set": {
-                "reputation": reputation
+                "reputation": reputations
             }
         },
         upsert=True
@@ -178,7 +178,7 @@ async def reputation(_, message):
     chat_id = message.chat.id
     if len(message.command) != 2:
         if not message.reply_to_message:
-            reputation = await get_reputation(chat_id)
+            reputation = await get_reputations(chat_id)
             msg = f"**Reputation list of {message.chat.title}:- **\n"
             limit = 0
             reputation_dicc = {}
