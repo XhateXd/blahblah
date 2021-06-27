@@ -104,9 +104,9 @@ regex_downvote = r"^(\-|\-\-|\-1|👎)$"
     group=reputation_positive_group,
 )
 
-@run_async
+
 @user_admin
-def upvote(_, message):
+async def upvote(_, message):
 
     if not await is_reputation_on(message.chat.id):
         return
@@ -148,9 +148,9 @@ def upvote(_, message):
     group=reputation_negative_group,
 )
 
-@run_async
+
 @user_admin
-def downvote(_, message):
+async def downvote(_, message):
 
     if not await is_reputation_on(message.chat.id):
         return
