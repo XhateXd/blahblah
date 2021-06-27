@@ -11,8 +11,8 @@ from SungJinwooRobot.services.mongo2 import db
 from SungJinwooRobot.services.pyrogram import pbot as app
 
 repdb = db.rep
-karma_positive_group = 3
-karma_negative_group = 4
+reputation_positive_group = 3
+reputation_negative_group = 4
 
 
 async def int_to_alpha(user_id: int) -> str:
