@@ -10,7 +10,7 @@ from SungJinwooRobot.function.pluginhelpers import member_permissions
 from SungJinwooRobot.services.mongo2 import db
 from SungJinwooRobot.services.pyrogram import pbot as app
 
-karmadb = db.karma
+repdb = db.rep
 karma_positive_group = 3
 karma_negative_group = 4
 
@@ -34,50 +34,50 @@ async def alpha_to_int(user_id_alphabet: str) -> int:
     return user_id
 
 
-async def get_karmas_count() -> dict:
-    chats = karmadb.find({"chat_id": {"$lt": 0}})
+async def get_reputation_count() -> dict:
+    chats = repdb.find({"chat_id": {"$lt": 0}})
     if not chats:
         return {}
     chats_count = 0
-    karmas_count = 0
+    reputation_count = 0
     for chat in await chats.to_list(length=1000000):
-        for i in chat["karma"]:
-            karmas_count += chat["karma"][i]["karma"]
+        for i in chat["reputation"]:
+            reputation_count += chat["reputation"][i]["reputation"]
         chats_count += 1
-    return {"chats_count": chats_count, "karmas_count": karmas_count}
+    return {"chats_count": chats_count, "reputation_count": reputation_count}
 
 
-async def get_karmas(chat_id: int) -> Dict[str, int]:
-    karma = await karmadb.find_one({"chat_id": chat_id})
-    if karma:
-        karma = karma["karma"]
+async def get_reputation(chat_id: int) -> Dict[str, int]:
+    reputation = await repdb.find_one({"chat_id": chat_id})
+    if reputation:
+        reputation = reputation["reputation"]
     else:
-        karma = {}
-    return karma
+        reputation = {}
+    return reputation
 
 
-async def get_karma(chat_id: int, name: str) -> Union[bool, dict]:
+async def get_reputation(chat_id: int, name: str) -> Union[bool, dict]:
     name = name.lower().strip()
-    karmas = await get_karmas(chat_id)
-    if name in karmas:
-        return karmas[name]
+    reputation = await get_reputation(chat_id)
+    if name in reputation:
+        return reputation[name]
 
 
-async def update_karma(chat_id: int, name: str, karma: dict):
+async def update_reputation(chat_id: int, name: str, karma: dict):
     name = name.lower().strip()
-    karmas = await get_karmas(chat_id)
-    karmas[name] = karma
-    await karmadb.update_one(
-        {"chat_id": chat_id}, {"$set": {"karma": karmas}}, upsert=True
+    reputation = await get_reputation(chat_id)
+    reputation[name] = reputation
+    await repdb.update_one(
+        {"chat_id": chat_id}, {"$set": {"reputation": reputation}}, upsert=True
     )
 
 
-_mod_name_ = "Karma"
+_mod_name_ = "Reputation"
 _help_ = """[UPVOTE] - Use upvote keywords like "+", "+1", "thanks" etc to upvote a message.
 [DOWNVOTE] - Use downvote keywords like "-", "-1", etc to downvote a message.
-Reply to a message with /karma to check a user's karma
-Send /karma without replying to any message to chek karma list of top 10 users
-<i> Special Credits to WilliamButcherBot </i>"""
+Reply to a message with /reputation to check a user's reputation
+Send /reputation without replying to any message to check reputation list of top 10 users
+"""
 
 
 regex_upvote = r"^((?i)\+|\+\+|\+1|thx|tnx|ty|thank you|thanx|thanks|pro|cool|good|👍)$"
@@ -93,11 +93,11 @@ regex_downvote = r"^(\-|\-\-|\-1|👎)$"
     & ~filters.via_bot
     & ~filters.bot
     & ~filters.edited,
-    group=karma_positive_group,
+    group=reputation_positive_group,
 )
 async def upvote(_, message):
 
-    if not await is_karma_on(message.chat.id):
+    if not await is_reputation_on(message.chat.id):
         return
     try:
         if message.reply_to_message.from_user.id == message.from_user.id:
@@ -110,18 +110,18 @@ async def upvote(_, message):
     except:
         return
     user_mention = message.reply_to_message.from_user.mention
-    current_karma = await get_karma(chat_id, await int_to_alpha(user_id))
-    if current_karma:
-        current_karma = current_karma["karma"]
-        karma = current_karma + 1
-        new_karma = {"karma": karma}
-        await update_karma(chat_id, await int_to_alpha(user_id), new_karma)
+    current_reputation = await get_reputation(chat_id, await int_to_alpha(user_id))
+    if current_reputation:
+        current_reputation = current_reputation["reputation"]
+        reputation = current_reputation + 1
+        new_reputation = {"reputation": reputation}
+        await update_reputation(chat_id, await int_to_alpha(user_id), new_reputation)
     else:
-        karma = 1
-        new_karma = {"karma": karma}
-        await update_karma(chat_id, await int_to_alpha(user_id), new_karma)
+        reputation = 1
+        new_reputation = {"reputation": reputation}
+        await update_reputation(chat_id, await int_to_alpha(user_id), new_reputation)
     await message.reply_text(
-        f"Incremented Karma of {user_mention} By 1 \nTotal Points: {karma}"
+        f"Incremented Reputation of {user_mention} By 1 \nTotal Points: {reputation}"
     )
 
 
@@ -134,11 +134,11 @@ async def upvote(_, message):
     & ~filters.via_bot
     & ~filters.bot
     & ~filters.edited,
-    group=karma_negative_group,
+    group=reputation_negative_group,
 )
 async def downvote(_, message):
 
-    if not await is_karma_on(message.chat.id):
+    if not await is_reputation_on(message.chat.id):
         return
     try:
         if message.reply_to_message.from_user.id == message.from_user.id:
@@ -151,56 +151,56 @@ async def downvote(_, message):
     except:
         return
     user_mention = message.reply_to_message.from_user.mention
-    current_karma = await get_karma(chat_id, await int_to_alpha(user_id))
-    if current_karma:
-        current_karma = current_karma["karma"]
-        karma = current_karma - 1
-        new_karma = {"karma": karma}
-        await update_karma(chat_id, await int_to_alpha(user_id), new_karma)
+    current_reputation = await get_reputation(chat_id, await int_to_alpha(user_id))
+    if current_reputation:
+        current_reputation = current_reputation["reputation"]
+        reputation = current_reputation - 1
+        new_reputation = {"reputation": reputation}
+        await update_reputation(chat_id, await int_to_alpha(user_id), new_reputation)
     else:
-        karma = 1
-        new_karma = {"karma": karma}
-        await update_karma(chat_id, await int_to_alpha(user_id), new_karma)
+        reputation = 1
+        new_reputation = {"reputation": reputation}
+        await update_reputation(chat_id, await int_to_alpha(user_id), new_reputation)
     await message.reply_text(
-        f"Decremented Karma Of {user_mention} By 1 \nTotal Points: {karma}"
+        f"Decremented Reputation Of {user_mention} By 1 \nTotal Points: {reputation}"
     )
 
 
-@app.on_message(filters.command("karma") & filters.group)
-async def karma(_, message):
+@app.on_message(filters.command("reputation") & filters.group)
+async def reputation(_, message):
     chat_id = message.chat.id
     if len(message.command) != 2:
         if not message.reply_to_message:
-            karma = await get_karmas(chat_id)
-            msg = f"**Karma list of {message.chat.title}:- **\n"
+            reputation = await get_reputation(chat_id)
+            msg = f"**Reputation list of {message.chat.title}:- **\n"
             limit = 0
-            karma_dicc = {}
-            for i in karma:
+            reputation_dicc = {}
+            for i in reputation:
                 user_id = await alpha_to_int(i)
-                user_karma = karma[i]["karma"]
-                karma_dicc[str(user_id)] = user_karma
-                karma_arranged = dict(
-                    sorted(karma_dicc.items(), key=lambda item: item[1], reverse=True)
+                user_reputation = reputation[i]["reputation"]
+                reputation_dicc[str(user_id)] = user_reputation
+                reputation_arranged = dict(
+                    sorted(reputation_dicc.items(), key=lambda item: item[1], reverse=True)
                 )
-            for user_idd, karma_count in karma_arranged.items():
+            for user_idd, reputation_count in reputation_arranged.items():
                 if limit > 9:
                     break
                 try:
                     user_name = (await app.get_users(int(user_idd))).username
                 except Exception:
                     continue
-                msg += f"{user_name} : `{karma_count}`\n"
+                msg += f"{user_name} : `{reputation_count}`\n"
                 limit += 1
             await message.reply_text(msg)
         else:
             user_id = message.reply_to_message.from_user.id
-            karma = await get_karma(chat_id, await int_to_alpha(user_id))
-            if karma:
-                karma = karma["karma"]
-                await message.reply_text(f"**Total Points**: __{karma}__")
+            reputation = await get_reputation(chat_id, await int_to_alpha(user_id))
+            if reputation:
+                reputation = reputation["reputation"]
+                await message.reply_text(f"**Total Points**: __{reputation}__")
             else:
-                karma = 0
-                await message.reply_text(f"**Total Points**: __{karma}__")
+                reputation = 0
+                await message.reply_text(f"**Total Points**: __{reputation}__")
         return
     status = message.text.split(None, 1)[1].strip()
     status = status.lower()
@@ -211,12 +211,12 @@ async def karma(_, message):
         await message.reply_text("You don't have enough permissions.")
         return
     if status == "on" or status == "ON":
-        await karma_on(chat_id)
+        await reputation_on(chat_id)
         await message.reply_text(
-            f"Added Chat {chat_id} To Database. Karma will be enabled here"
+            f"Added Chat {chat_id} To Database. Reputation will be enabled here"
         )
     elif status == "off" or status == "OFF":
-        await karma_off(chat_id)
+        await reputation_off(chat_id)
         await message.reply_text(
-            f"Removed Chat {chat_id} To Database. Karma will be disabled here"
+            f"Removed Chat {chat_id} To Database. Reputation will be disabled here"
         )
