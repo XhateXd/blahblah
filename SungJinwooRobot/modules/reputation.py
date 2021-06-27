@@ -5,7 +5,7 @@ from typing import Dict, Union
 
 from pyrogram import filters
 
-from SungJinwooRobot.db.mongo_helpers.karma import is_karma_on, karma_off, karma_on
+from SungJinwooRobot.db.mongo_helpers.reputation import is_reputation_on, reputation_off, reputation_on
 from SungJinwooRobot.function.pluginhelpers import member_permissions
 from SungJinwooRobot.services.mongo2 import db
 from SungJinwooRobot.services.pyrogram import pbot as app
