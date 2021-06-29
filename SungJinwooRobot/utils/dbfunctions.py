@@ -2,7 +2,7 @@ from SungJinwooRobot import db
 from typing import Dict, List, Union
 
 karmadb = db.karma
-coupledb = db.couple
+
 
 async def get_karmas_count() -> dict:
     chats = karmadb.find({"chat_id": {"$lt": 0}})
@@ -67,26 +67,5 @@ async def alpha_to_int(user_id_alphabet: str) -> int:
     user_id = int(user_id)
     return user_id
 
-# Couple Chooser
-async def _get_lovers(chat_id: int):
-    lovers = await coupledb.find_one({"chat_id": chat_id})
-    if not lovers:
-        return {}
-    return lovers["couple"]
 
-
-async def get_couple(chat_id: int, date: str):
-    lovers = await _get_lovers(chat_id)
-    if date in lovers:
-        return lovers[date]
-    else:
-        return False
-
-
-async def save_couple(chat_id: int, date: str, couple: dict):
-    lovers = await _get_lovers(chat_id)
-    lovers[date] = couple
-    await coupledb.update_one(
-        {"chat_id": chat_id}, {"$set": {"couple": lovers}}, upsert=True
-    )
 
