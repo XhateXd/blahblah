@@ -5,7 +5,7 @@ from traceback import format_exc
 from pyrogram import filters
 from pyrogram.types import Message
 
-from SungJinwooRobot import pbot as app
+from SungJinwooRobot.services.pyrogram import pbot as app
 from SungJinwooRobot.function.arqhelp import arq
 from SungJinwooRobot.utils.errors import capture_err
 
