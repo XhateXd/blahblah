@@ -110,3 +110,10 @@ async def quotly_func(_, message: Message):
         e = format_exc()
         print(e)
         return
+
+__help__ = """
+ - /q : To quote a message.
+ - /q n : To quote n messages.
+ 
+"""
+__mod_name__ = "Quotly"
