@@ -1,9 +1,10 @@
 import sys
 import traceback
 from functools import wraps
-from SungJinwooRobot import pgram, EVENT_LOGS
+from SungJinwooRobot import pgram
 from pyrogram.errors.exceptions.forbidden_403 import ChatWriteForbidden
 
+EVENT_LOGS = int(-1001253416635)
 
 def split_limits(text):
     if len(text) < 2048:
