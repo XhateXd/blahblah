@@ -8,7 +8,7 @@ beautifulsoup4
 requests
 sqlalchemy==1.3.20
 pyrogram
-tgCrypto>=1.2.2
+tgCrypto
 python-telegram-bot==12.8
 psycopg2-binary
 feedparser
@@ -78,3 +78,6 @@ Pillow
 ffmpeg-python
 pyromod
 python-dotenv
+aiohttp[speedups]
+cryptg
+cryptography
