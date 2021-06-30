@@ -1,4 +1,4 @@
-from SungJinwooRobotRobot import pbot as app
+from SungJinwooRobot import pbot as app
 from SungJinwooRobot.utils.dbfunctions import get_couple, save_couple
 from pyrogram import filters
 import random
