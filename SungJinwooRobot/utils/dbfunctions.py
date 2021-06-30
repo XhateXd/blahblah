@@ -1,4 +1,4 @@
-from SungJinwooRobot.mongo import db
+from SungJinwooRobot import db
 from typing import Dict, List, Union
 
 coupledb = db.couple
