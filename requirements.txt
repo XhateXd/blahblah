@@ -76,3 +76,5 @@ NumPy
 opencv-python-headless
 Pillow
 ffmpeg-python
+pyromod
+python-dotenv
