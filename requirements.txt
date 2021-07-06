@@ -76,3 +76,5 @@ NumPy
 opencv-python-headless
 Pillow
 ffmpeg-python
+nudepy
+better_profanity
