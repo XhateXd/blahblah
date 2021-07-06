@@ -33,7 +33,7 @@ from SungJinwooRobot.function.telethonbasics import is_admin
 from SungJinwooRobot.events import register
 from SungJinwooRobot import MONGO_DB_URI 
 from pymongo import MongoClient
-from SungJinwooRobot.modules.sql_extended.nsfw_watch_sql import (
+from SungJinwooRobot.services.sql.nsfw_watch_sql import (
     add_nsfwatch,
     get_all_nsfw_enabled_chat,
     is_nsfwatch_indb,
