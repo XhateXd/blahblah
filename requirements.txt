@@ -30,7 +30,7 @@ aiogram
 aioredis # Redis memery storage fom aiogram
 envparse
 PyYAML>5.0
-aiohttp
+aiohttp>=2.2.5
 CurrencyConverter
 googletrans==3.1.0a0
 jikanpy
