@@ -79,13 +79,6 @@ async def update_reputation(chat_id: int, name: str, reputation: dict):
 
 
 
-_mod_name_ = "Reputation"
-_help_ = """[UPVOTE] - Use upvote keywords like "+", "+1", "thanks" etc to upvote a message.
-[DOWNVOTE] - Use downvote keywords like "-", "-1", etc to downvote a message.
-Reply to a message with /reputation to check a user's reputation
-Send /reputation without replying to any message to check reputation list of top 10 users
-"""
-
 
 __help__ = """
  - /reputation ON: To switch on reputation.
