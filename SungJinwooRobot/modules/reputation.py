@@ -87,6 +87,20 @@ Send /reputation without replying to any message to check reputation list of top
 """
 
 
+__help__ = """
+ - /reputation ON: To switch on reputation.
+ - /reputation OFF: To switch off reputation.
+ - Reply to a message with /reputation to check a user's reputation.
+ - Send /reputation without replying to any message to check reputation list of top 10 users.
+
+- *UPVOTE* - Use upvote keywords like "+", "+1", "thanks" etc to upvote a message.
+- *DOWNVOTE* - Use downvote keywords like "-", "-1", etc to downvote a message.
+"""
+__mod_name__ = "Reputation"
+
+
+
+
 regex_upvote = r"^((?i)\+|\+\+|\+1|thx|tnx|ty|thank you|thanx|thanks|pro|cool|good|👍)$"
 regex_downvote = r"^(\-|\-\-|\-1|👎)$"
 
