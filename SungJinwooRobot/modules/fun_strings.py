@@ -27,6 +27,10 @@ GIFS = [
     'CgACAgQAAx0CUrL8UQACAsNgwLazFzdItfwgrvhX7VuIEeA2WgACXgIAAqAFLFN8fZqST09aWx8E'
 ]
 
+slaps = [
+    'CgACAgUAAx0CUfVQawABEHn5YQGv46De3j0dmL3oKfkd-6zWWgADggIAAtA8EVQUHe9aDTbh0SAE'
+]
+
 SLAP_SungJinWoo_TEMPLATES = (
     "Slap me one more time and I'll mute you.",
     "Stop slapping me. REEEEEEEEEEEEEE.",
