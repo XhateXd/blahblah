@@ -41,12 +41,10 @@ def slap(update: Update, context: CallbackContext):
     message = update.effective_message
     name = message.reply_to_message.from_user.first_name if message.reply_to_message else message.from_user.first_name
     first = message.from_user.first_name
-    reply_animation = message.reply_to_message.reply_animation if message.reply_to_message 
+    reply_animation = message.reply_to_message.reply_animation if message.reply_to_message else message.reply_animation
     reply_animation(
-        random.choice(fun_strings.SLAPS), caption=f'*{first} slaps {name}*')
-    reply_animation1 = message.reply_to_message.reply_animation1 if not message.reply_to_message
-    reply_animation1(
-        random.choice(fun_strings.SLAPS), caption=f'*{first} gets slapped*')
+        random.choice(fun_strings.SLAPS), caption=f'*{first} slaps {name}**')
+    
 
 @run_async
 def pat(update: Update, context: CallbackContext):
