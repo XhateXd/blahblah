@@ -101,6 +101,7 @@ HELP_STRINGS = """
 
 
 KURUMI_IMG = "https://telegra.ph/file/78a95df585a55187568ee.jpg"
+SENKUSTART = "https://telegra.ph/file/c6a6564f8175d9303a61a.mp4"
 
 DONATE_STRING = """Heya, glad to hear you want to donate!
 Click here to donate in [Paypal](https://www.paypal.me/zameeljaz)"""
@@ -212,8 +213,8 @@ def start(update: Update, context: CallbackContext):
                 timeout=60,
             )
     else:
-        update.effective_message.reply_text(
-            "I'm awake already!\n<b>Haven't slept since:</b> <code>{}</code>"
+        update.effective_message.reply_video(
+            SENKUSTART, caption= "<b>I have been unpetrified since:</b> <code>{}</code> \n<b>This is Exhilarating</b>"
             .format(uptime),
             parse_mode=ParseMode.HTML)
 
