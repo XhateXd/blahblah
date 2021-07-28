@@ -38,57 +38,11 @@ def sanitize(update: Update, context: CallbackContext):
 
 @run_async
 def slap(update: Update, context: CallbackContext):
-    bot, args = context.bot, context.args
     message = update.effective_message
-    chat = update.effective_chat
-
-    reply_text = message.reply_to_message.reply_text if message.reply_to_message else message.reply_text
-
-    curr_user = html.escape(message.from_user.first_name)
-    user_id = extract_user(message, args)
-
-    if user_id == bot.id:
-        temp = random.choice(fun_strings.SLAP_SAITAMA_TEMPLATES)
-
-        if isinstance(temp, list):
-            if temp[2] == "tmute":
-                if is_user_admin(chat, message.from_user.id):
-                    reply_text(temp[1])
-                    return
-
-                mutetime = int(time.time() + 60)
-                bot.restrict_chat_member(
-                    chat.id,
-                    message.from_user.id,
-                    until_date=mutetime,
-                    permissions=ChatPermissions(can_send_messages=False))
-            reply_text(temp[0])
-        else:
-            reply_text(temp)
-        return
-
-    if user_id:
-
-        slapped_user = bot.get_chat(user_id)
-        user1 = curr_user
-        user2 = html.escape(slapped_user.first_name)
-
-    else:
-        user1 = bot.first_name
-        user2 = curr_user
-
-    temp = random.choice(fun_strings.SLAP_TEMPLATES)
-    item = random.choice(fun_strings.ITEMS)
-    hit = random.choice(fun_strings.HIT)
-    throw = random.choice(fun_strings.THROW)
-
-    if update.effective_user.id == 1096215023:
-        temp = "@NeoTheKitty scratches {user2}"
-
-    reply = temp.format(
-        user1=user1, user2=user2, item=item, hits=hit, throws=throw)
-
-    reply_text(reply, parse_mode=ParseMode.HTML)
+    name = message.reply_to_message.from_user.first_name if message.reply_to_message else message.from_user.first_name
+    reply_animation = message.reply_to_message.reply_animation if message.reply_to_message else message.reply_animation
+    reply_animation(
+        random.choice(fun_strings.slaps), caption=f'*{first_Name} slaps {name}*')
 
 
 @run_async
