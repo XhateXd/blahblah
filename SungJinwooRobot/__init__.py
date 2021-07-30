@@ -6,6 +6,7 @@ import time
 import spamwatch
 from motor.motor_asyncio import AsyncIOMotorClient as MongoClient
 from pyrogram import Client, errors
+from redis import StrictRedis
 from SungJinwooRobot.config import get_bool_key, get_int_key, get_list_key, get_str_key
 from SungJinwooRobot.utils.logger import log
 
@@ -189,6 +190,18 @@ if not SPAMWATCH_API:
     LOGGER.warning("SpamWatch API key missing! recheck your config.")
 else:
     sw = spamwatch.Client(SPAMWATCH_API)
+
+
+REDIS = StrictRedis.from_url(REDIS_URL,decode_responses=True)
+try:
+    REDIS.ping()
+    LOGGER.info("Your redis server is now alive!")
+except BaseException:
+    raise Exception("Your redis server is not alive, please check again.")
+    
+finally:
+   REDIS.ping()
+   LOGGER.info("Your redis server is now alive!")
 
 
 updater = tg.Updater(TOKEN, workers=WORKERS, use_context=True)
