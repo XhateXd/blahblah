@@ -31,7 +31,7 @@ from SungJinwooRobot import BOT_ID
 from SungJinwooRobot.db.mongo_helpers.aichat import add_chat, get_session, remove_chat
 from SungJinwooRobot.function.inlinehelper import arq
 from SungJinwooRobot.function.pluginhelpers import admins_only, edit_or_reply
-from SungJinwooRobot import pbot as daisyx
+from SungJinwooRobot import pbot as senku
 
 translator = google_translator()
 
