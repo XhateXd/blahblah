@@ -74,21 +74,28 @@ def get_readable_time(seconds: int) -> str:
 
 
 PM_START_TEXT = """
-`Hello` [🙋🏻‍](https://telegra.ph/file/879b6a55652d0fbd4463a.jpg) `My name is` *Senku*
-`I'm here to help you manage your groups`. 
+Hello {}! Nice to meet you! 
+
+I am *Senku Ishigami* , an group management bot based on the anime [Dr Stone](https://myanimelist.net/anime/38691/Dr_Stone)!
+I can help in managing your groups using my IQ[.](https://telegra.ph/file/879b6a55652d0fbd4463a.jpg)
+
+Click on the Commands Button below to go through my commands.
+Add me in your group to use all my commands!
+
+
 """
 
 buttons = [
     [
         InlineKeyboardButton(
-            text="➕️ Add SENKU TO YOUR GROUP ➕️", url="t.me/Senkubest_bot?startgroup=true"),
+            text=" Add Senku to your Group✅", url="t.me/Senkubest_bot?startgroup=true"),
     ],
     [
-        InlineKeyboardButton(text="🔰ABOUT", callback_data="kurumi_"),
-        InlineKeyboardButton(text=" ⚙COMMANDS", callback_data="help_back"),
+        InlineKeyboardButton(text="Help", callback_data="kurumi_"),
+        InlineKeyboardButton(text=" 💬Commands", callback_data="help_back"),
     ],
     [
-        InlineKeyboardButton(text="🚨Support", url="https://t.me/myawesomebot21"),
+        InlineKeyboardButton(text="🚨Support Grp", url="https://t.me/myawesomebot21"),
         InlineKeyboardButton(text="❗Updates", url="https://t.me/senkubotupdates"),
    
     ], 
@@ -96,8 +103,8 @@ buttons = [
 
 
 HELP_STRINGS = """
-`Hi.. I'm` [🙋🏻](https://telegra.ph/file/cbad2a4725b43314dc340.jpg)
-`Click on the buttons below to know about specific modules..`"""
+I am Senku from Dr Stone. Welcome to my help menu[!](https://telegra.ph/file/599c521d60b93483debf2.jpg)
+Click on the buttons below to know about specific modules.."""
 
 
 KURUMI_IMG = "https://telegra.ph/file/78a95df585a55187568ee.jpg"
@@ -206,12 +213,27 @@ def start(update: Update, context: CallbackContext):
                 IMPORTED["rules"].send_rules(update, args[0], from_pm=True)
 
         else:
+            first_name = update.effective_user.first_name
             update.effective_message.reply_text(
-                PM_START_TEXT,
-                reply_markup=InlineKeyboardMarkup(buttons),
+                PM_START_TEXT.format(
+                    escape_markdown(first_name)),
                 parse_mode=ParseMode.MARKDOWN,
-                timeout=60,
-            )
+                reply_markup=InlineKeyboardMarkup(
+                [
+    [
+        InlineKeyboardButton(
+            text=" Add Senku to your Group✅", url="t.me/Senkubest_bot?startgroup=true"),
+    ],
+    [
+        InlineKeyboardButton(text="Help", callback_data="kurumi_"),
+        InlineKeyboardButton(text=" 💬Commands", callback_data="help_back"),
+    ],
+    [
+        InlineKeyboardButton(text="🚨Support Grp", url="https://t.me/myawesomebot21"),
+        InlineKeyboardButton(text="❗Updates", url="https://t.me/senkubotupdates"),
+   
+   ]]))  
+            
     else:
         update.effective_message.reply_video(
             SENKUSTART, caption= "<b>I have been unpetrified since:</b> <code>{}</code> \n<b>This is Exhilarating</b>"
@@ -410,7 +432,7 @@ def get_help(update: Update, context: CallbackContext):
         if len(args) >= 2 and any(args[1].lower() == x for x in HELPABLE):
             module = args[1].lower()
             update.effective_message.reply_text(
-              KURUMI_IMG, caption=f"Contact me in PM to get help of {module.capitalize()}",
+                "Contact me in PM to get help of {module.capitalize()}",
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
