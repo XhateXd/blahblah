@@ -76,7 +76,7 @@ def get_readable_time(seconds: int) -> str:
 PM_START_TEXT = """
 Hello {}! Nice to meet you! 
 
-I am *Senku Ishigami* , an group management bot based on the anime [Dr Stone](https://myanimelist.net/anime/38691/Dr_Stone)!
+I am *Senku Ishigami* , an group management bot based on the anime *Dr Stone*!
 I can help in managing your groups using my IQ[.](https://telegra.ph/file/879b6a55652d0fbd4463a.jpg)
 
 Click on the Commands Button below to go through my commands.
@@ -91,7 +91,7 @@ buttons = [
             text=" Add Senku to your Group✅", url="t.me/Senkubest_bot?startgroup=true"),
     ],
     [
-        InlineKeyboardButton(text="Help", callback_data="kurumi_"),
+        InlineKeyboardButton(text="❓Help", callback_data="kurumi_"),
         InlineKeyboardButton(text=" 💬Commands", callback_data="help_back"),
     ],
     [
