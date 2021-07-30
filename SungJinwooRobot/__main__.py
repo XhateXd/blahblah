@@ -76,19 +76,16 @@ def get_readable_time(seconds: int) -> str:
 PM_START_TEXT = """
 Hello {}! Nice to meet you! 
 
-I am *Senku Ishigami* , an group management bot based on the anime *Dr Stone*!
-I can help in managing your groups using my IQ[.](https://telegra.ph/file/879b6a55652d0fbd4463a.jpg)
+I am *Senku Ishigami* , an group management bot based on the anime *Dr Stone*[!](https://telegra.ph/file/879b6a55652d0fbd4463a.jpg)
 
-Click on the Commands Button below to go through my commands.
-Add me in your group to use all my commands!
-
+*Click on the Commands Button below to go through my commands.*
 
 """
 
 buttons = [
     [
         InlineKeyboardButton(
-            text=" Add Senku to your Group✅", url="t.me/Senkubest_bot?startgroup=true"),
+            text=" Add Senku to your Group", url="t.me/Senkubest_bot?startgroup=true"),
     ],
     [
         InlineKeyboardButton(text="❓Help", callback_data="kurumi_"),
@@ -103,7 +100,8 @@ buttons = [
 
 
 HELP_STRINGS = """
-I am Senku from Dr Stone. Welcome to my help menu[!](https://telegra.ph/file/599c521d60b93483debf2.jpg)
+I am *Senku* from Dr Stone. Welcome to my help menu[!](https://telegra.ph/file/599c521d60b93483debf2.jpg)
+I can help in managing your group using my IQ. This is Exhilarating!
 Click on the buttons below to know about specific modules.."""
 
 
