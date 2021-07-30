@@ -76,7 +76,7 @@ def get_readable_time(seconds: int) -> str:
 PM_START_TEXT = """
 Hello {}! Nice to meet you! 
 
-I am *Senku Ishigami* , an group management bot based on the anime *Dr Stone*[!](https://telegra.ph/file/879b6a55652d0fbd4463a.jpg)
+I am *Senku Ishigami* , a group management bot based on the anime *Dr Stone*[!](https://telegra.ph/file/879b6a55652d0fbd4463a.jpg)
 
 *Click on the Commands Button below to go through my commands.*
 
