@@ -6,9 +6,6 @@ import time
 import spamwatch
 from motor.motor_asyncio import AsyncIOMotorClient as MongoClient
 from pyrogram import Client, errors
-from aiogram import Bot, Dispatcher, types
-from aiogram.bot.api import TELEGRAM_PRODUCTION, TelegramAPIServer
-from aiogram.contrib.fsm_storage.redis import RedisStorage2
 from SungJinwooRobot.config import get_bool_key, get_int_key, get_list_key, get_str_key
 from SungJinwooRobot.utils.logger import log
 
@@ -32,32 +29,7 @@ if sys.version_info[0] < 3 or sys.version_info[1] < 6:
         "You MUST have a python version of at least 3.6! Multiple features depend on this. Bot quitting."
     )
     quit(1)
-
-# Support for custom BotAPI servers
-if url := get_str_key("BOTAPI_SERVER"):
-    server = TelegramAPIServer.from_base(url)
-else:
-    server = TELEGRAM_PRODUCTION
-TOKEN = get_str_key("TOKEN", required=True)
-OWNER_ID = get_int_key("OWNER_ID", required=True)
-LOGS_CHANNEL_ID = get_int_key("LOGS_CHANNEL_ID", required=True)
-OPERATORS = list(get_list_key("OPERATORS"))
-OPERATORS.append(OWNER_ID)
-bot = Bot(token=TOKEN, parse_mode=types.ParseMode.HTML, server=server)
-storage = RedisStorage2(
-    host=get_str_key("REDIS_URI"),
-    port=get_int_key("REDIS_PORT"),
-    password=get_str_key("REDIS_PASS"),
-)
-dp = Dispatcher(bot, storage=storage)
-loop = asyncio.get_event_loop()
-SUPPORT_CHAT = get_str_key("SUPPORT_CHAT", required=True)
-log.debug("Getting bot info...")
-bot_info = loop.run_until_complete(bot.get_me())
-BOT_USERNAME = bot_info.username
-BOT_ID = bot_info.id
-
-    
+ 
     
 ENV = bool(os.environ.get("ENV", False))
 
