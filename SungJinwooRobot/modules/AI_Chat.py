@@ -23,8 +23,7 @@ import re
 
 import aiohttp
 
-# from google_trans_new import google_translator
-from googletrans import Translator as google_translator
+from google_trans_new import google_translator
 from pyrogram import filters
 
 from SungJinwooRobot import BOT_ID
