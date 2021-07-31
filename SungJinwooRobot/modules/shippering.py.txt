@@ -1,14 +1,37 @@
+"""
+MIT License
+
+Copyright (c) 2021 TheHamkerCat
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+"""
 import random
 from datetime import datetime
 
 from pyrogram import filters
 
-from SungJinwooRobot import pbot as app
+from SungJinwooRobot import app
 from SungJinwooRobot.utils.errors import capture_err
-from SungJinwooRobot.modules.mongo.couples_mongo import get_couple, save_couple
+from SungJinwooRobot.utils.dbfunctions import get_couple, save_couple
 
-__mod_name__ = "Couples"
-__help__ = "/couples - To Choose Couple Of The Day"
+__MODULE__ = "Shippering"
+__HELP__ = "/couple - To Choose Couple Of The Day"
 
 
 # Date and time
@@ -34,11 +57,13 @@ today = str(dt()[0])
 tomorrow = str(dt_tom())
 
 
-@app.on_message(filters.command("couples") & ~filters.edited)
+@app.on_message(filters.command("couple") & ~filters.edited)
 @capture_err
 async def couple(_, message):
     if message.chat.type == "private":
-        return await message.reply_text("This command only works in groups.")
+        return await message.reply_text(
+            "This command only works in groups."
+        )
     try:
         chat_id = message.chat.id
         is_selected = await get_couple(chat_id, today)
@@ -58,6 +83,7 @@ async def couple(_, message):
 
             couple_selection_message = f"""**Couple of the day:**
 {c1_mention} + {c2_mention} = ❤️
+
 __New couple of the day may be chosen at 12AM {tomorrow}__"""
             await app.send_message(
                 message.chat.id, text=couple_selection_message
@@ -72,6 +98,7 @@ __New couple of the day may be chosen at 12AM {tomorrow}__"""
             c2_name = (await app.get_users(c2_id)).first_name
             couple_selection_message = f"""Couple of the day:
 [{c1_name}](tg://openmessage?user_id={c1_id}) + [{c2_name}](tg://openmessage?user_id={c2_id}) = ❤️
+
 __New couple of the day may be chosen at 12AM {tomorrow}__"""
             await app.send_message(
                 message.chat.id, text=couple_selection_message
