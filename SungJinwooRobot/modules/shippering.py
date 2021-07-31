@@ -26,7 +26,7 @@ from datetime import datetime
 
 from pyrogram import filters
 
-from SungJinwooRobot import pbot
+from SungJinwooRobot import pbot as app
 from SungJinwooRobot.utils.errors import capture_err
 from SungJinwooRobot.utils.dbfunctions import get_couple, save_couple
 
