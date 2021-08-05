@@ -78,3 +78,5 @@ Pillow
 ffmpeg-python
 nudepy
 better_profanity
+emoji-country-flag
+countryinfo
