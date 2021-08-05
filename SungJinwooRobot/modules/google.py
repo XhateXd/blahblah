@@ -167,5 +167,6 @@ __help__ = """
  • `/app <appname>` : Searches for an app in Play Store and returns its details.
  • `/gps <location>` : Gets gps location.
  • `/github <username>` : Gets information about a GitHub user.
- • `/country <country name>` : Gets info about given country
+ • `/country <country name>` : Gets info about given country.
+ • `/imdb <name>` : To search an Anime/Movie/TV Series on IMDb.
 """
