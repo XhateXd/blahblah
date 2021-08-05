@@ -1,43 +1,39 @@
-# Copyright (C) 2021 Red-Aura & TeamDaisyX & HamkerCat
+#    Copyright (C) 2020-2021 by @AmarnathCdj & @InukaAsith
+#    Chatbot system written by @AmarnathCdj databse added and recoded for pyrogram by @InukaAsith
+#    This programme is a part of Senku (TG bot) project
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-# This file is part of Daisy (Telegram Bot)
-
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as
-# published by the Free Software Foundation, either version 3 of the
-# License, or (at your option) any later version.
-
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU Affero General Public License for more details.
-
-# You should have received a copy of the GNU Affero General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-import re
+#import re
 
 import emoji
 
+IBM_WATSON_CRED_URL = "https://api.us-south.speech-to-text.watson.cloud.ibm.com/instances/bd6b59ba-3134-4dd4-aff2-49a79641ea15"
+IBM_WATSON_CRED_PASSWORD = "UQ1MtTzZhEsMGK094klnfa-7y_4MCpJY1yhd52MXOo3Y"
 url = "https://acobot-brainshop-ai-v1.p.rapidapi.com/get"
 import re
 
 import aiohttp
-
 from google_trans_new import google_translator
 from pyrogram import filters
 
 from SungJinwooRobot import BOT_ID
 from SungJinwooRobot.db.mongo_helpers.aichat import add_chat, get_session, remove_chat
-from SungJinwooRobot.function.inlinehelper import arq
 from SungJinwooRobot.function.pluginhelpers import admins_only, edit_or_reply
 from SungJinwooRobot import pbot as senku
 
 translator = google_translator()
-
-
-async def lunaQuery(query: str, user_id: int):
-    luna = await arq.luna(query, user_id)
-    return luna.result
+import requests
 
 
 def extract_emojis(s):
@@ -61,8 +57,6 @@ async def fetch(url):
 
 senku_chats = []
 en_chats = []
-# AI Chat (C) 2020-2021 by @InukaAsith
-
 
 @senku.on_message(
     filters.command("chatbot") & ~filters.edited & ~filters.bot & ~filters.private
@@ -81,7 +75,7 @@ async def hmm(_, message):
         lel = await edit_or_reply(message, "`Processing...`")
         lol = add_chat(int(message.chat.id))
         if not lol:
-            await lel.edit("Senku AI is Already Activated In This Chat")
+            await lel.edit("Senku AI Already Activated In This Chat")
             return
         await lel.edit(
             f"Senku AI Successfully Added For Users In The Chat {message.chat.id}"
@@ -137,14 +131,20 @@ async def hmm(client, message):
     if chat_id in en_chats:
         test = msg
         test = test.replace("senku", "Aco")
-        test = test.replace("Senku", "Aco")
-        response = await lunaQuery(
-            test, message.from_user.id if message.from_user else 0
-        )
-        response = response.replace("Aco", "Senku")
-        response = response.replace("aco", "Senku")
+        test = test.replace("senku", "Aco")
+        URL = "https://api.affiliateplus.xyz/api/chatbot?message=hi&botname=@Senkubest_bot&ownername=@SenkuIshigamiXD"
 
-        pro = response
+        try:
+            r = requests.request("GET", url=URL)
+        except:
+            return
+
+        try:
+            result = r.json()
+        except:
+            return
+
+        pro = result["message"]
         try:
             await senku.send_chat_action(message.chat.id, "typing")
             await message.reply_text(pro)
@@ -182,32 +182,33 @@ async def hmm(client, message):
             # print (rm)
         try:
             lan = translator.detect(rm)
-            lan = lan.lang
         except:
             return
         test = rm
         if not "en" in lan and not lan == "":
             try:
-                test = translator.translate(test, dest="en")
-                test = test.text
+                test = translator.translate(test, lang_tgt="en")
             except:
                 return
         # test = emoji.demojize(test.strip())
 
+        # Kang with the credits bitches @InukaASiTHSenkubest_bot
         test = test.replace("senku", "Aco")
-        test = test.replace("Senku", "Aco")
-        response = await lunaQuery(
-            test, message.from_user.id if message.from_user else 0
-        )
-        response = response.replace("Aco", "Senku")
-        response = response.replace("aco", "Senku")
-        response = response.replace("Luna", "Senku")
-        response = response.replace("luna", "Senku")
-        pro = response
+        test = test.replace("senku", "Aco")
+        URL = f"https://api.affiliateplus.xyz/api/chatbot?message={test}&botname=@Senkubest_bot&ownername=@SenkuIshigamiXD"
+        try:
+            r = requests.request("GET", url=URL)
+        except:
+            return
+
+        try:
+            result = r.json()
+        except:
+            return
+        pro = result["message"]
         if not "en" in lan and not lan == "":
             try:
-                pro = translator.translate(pro, dest=lan)
-                pro = pro.text
+                pro = translator.translate(pro, lang_tgt=lan[0])
             except:
                 return
         try:
@@ -254,31 +255,34 @@ async def inuka(client, message):
         # print (rm)
     try:
         lan = translator.detect(rm)
-        lan = lan.lang
     except:
         return
     test = rm
     if not "en" in lan and not lan == "":
         try:
-            test = translator.translate(test, dest="en")
-            test = test.text
+            test = translator.translate(test, lang_tgt="en")
         except:
             return
 
-    # test = emoji.demojize(test.strip())
+    # test = emoji.demojize(test.strip()) 
 
     # Kang with the credits bitches @InukaASiTH
     test = test.replace("senku", "Aco")
-    test = test.replace("Senku", "Aco")
+    test = test.replace("senku", "Aco")
+    URL = f"https://api.affiliateplus.xyz/api/chatbot?message={test}&botname=@Senkubest_bot&ownername=@SenkuIshigamiXD"
+    try:
+        r = requests.request("GET", url=URL)
+    except:
+        return
 
-    response = await lunaQuery(test, message.from_user.id if message.from_user else 0)
-    response = response.replace("Aco", "Senku")
-    response = response.replace("aco", "Senku")
+    try:
+        result = r.json()
+    except:
+        return
 
-    pro = response
+    pro = result["message"]
     if not "en" in lan and not lan == "":
-        pro = translator.translate(pro, dest=lan)
-        pro = pro.text
+        pro = translator.translate(pro, lang_tgt=lan[0])
     try:
         await senku.send_chat_action(message.chat.id, "typing")
         await message.reply_text(pro)
@@ -287,7 +291,7 @@ async def inuka(client, message):
 
 
 @senku.on_message(
-    filters.regex("Senku|senku|SenkuBot|senkubot|Senkubot")
+    filters.regex("senku|Senku|SENKU|Senkubot|senkubot|SENKUBOT")
     & ~filters.bot
     & ~filters.via_bot
     & ~filters.forwarded
@@ -329,30 +333,34 @@ async def inuka(client, message):
         # print (rm)
     try:
         lan = translator.detect(rm)
-        lan = lan.lang
     except:
         return
     test = rm
     if not "en" in lan and not lan == "":
         try:
-            test = translator.translate(test, dest="en")
-            test = test.text
+            test = translator.translate(test, lang_tgt="en")
         except:
             return
 
     # test = emoji.demojize(test.strip())
 
+    # Kang with the credits bitches @InukaASiTH
     test = test.replace("senku", "Aco")
-    test = test.replace("Senku", "Aco")
-    response = await lunaQuery(test, message.from_user.id if message.from_user else 0)
-    response = response.replace("Aco", "Senku")
-    response = response.replace("aco", "Senku")
+    test = test.replace("senku", "Aco")
+    URL = f"https://api.affiliateplus.xyz/api/chatbot?message={test}&botname=@Senkubest_bot&ownername=@SenkuIshigamiXD"
+    try:
+        r = requests.request("GET", url=URL)
+    except:
+        return
 
-    pro = response
+    try:
+        result = r.json()
+    except:
+        return
+    pro = result["message"]
     if not "en" in lan and not lan == "":
         try:
-            pro = translator.translate(pro, dest=lan)
-            pro = pro.text
+            pro = translator.translate(pro, lang_tgt=lan[0])
         except Exception:
             return
     try:
@@ -363,12 +371,10 @@ async def inuka(client, message):
 
 
 __help__ = """
-**Chatbot**
 
- - /chatbot [ON/OFF]: Enables and disables AI Chat mode.
- - /chatbot EN : Enables English only chatbot
+ • `/chatbot [ON/OFF]`: Enables and disables AI Chat mode (EXCLUSIVE)
+ • `/chatbot EN`: Enables English only chatbot
  
-
 """
 
 __mod_name__ = "AI Chat"
