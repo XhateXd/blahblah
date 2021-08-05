@@ -81,3 +81,4 @@ better_profanity
 emoji-country-flag
 countryinfo
 html2text
+bing_image_downloader
