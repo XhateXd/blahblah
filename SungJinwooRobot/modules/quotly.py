@@ -9,11 +9,6 @@ from SungJinwooRobot.services.pyrogram import pbot as app
 from SungJinwooRobot.function.arqhelp import arq
 from SungJinwooRobot.utils.errors import capture_err
 
-mod_name = "Quote"
-help = """
-/q - To quote a message.
-/q [INTEGER] - To quote more than 1 messages.
-"""
 
 
 async def quotify(messages: list):
@@ -112,8 +107,9 @@ async def quotly_func(_, message: Message):
         return
 
 __help__ = """
- - /q : To quote a message.
- - /q n : To quote n messages.
+ • `/q` : To quote a message.
+ • `/q n` : To quote n messages.
+ • `/q r` : To quote with reply.
  
 """
 __mod_name__ = "Quotly"
