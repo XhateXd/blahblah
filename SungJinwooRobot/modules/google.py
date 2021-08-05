@@ -159,14 +159,17 @@ async def apk(e):
         await e.reply("Exception Occured:- " + str(err))
 
 
-__mod_name__ = "google"
 
-__help__ = """
- • `/google <text>` : Perform a google search.
+__mod_name__ = "Google"    
+
+__help__ = """ 
+
+ •`/google <text>` : Perform a google search.
  • `/img <text>` : Search Google for images and returns them.
  • `/app <appname>` : Searches for an app in Play Store and returns its details.
  • `/gps <location>` : Gets gps location.
  • `/github <username>` : Gets information about a GitHub user.
  • `/country <country name>` : Gets info about given country.
  • `/imdb <name>` : To search an Anime/Movie/TV Series on IMDb.
-"""
+
+"""    
