@@ -4,21 +4,21 @@ import re
 import time
 from functools import partial
 
-import Petra.modules.sql.welcome_sql as sql
-from Petra import (DEV_USERS, LOGGER, OWNER_ID, DRAGONS, DEMONS, TIGERS,
+import SungjinwooRobot.modules.sql.welcome_sql as sql
+from SungJinwooRobot import (DEV_USERS, LOGGER, OWNER_ID, DRAGONS, DEMONS, TIGERS,
                           WOLVES, sw, dispatcher, JOIN_LOGGER)
-from Petra.modules.helper_funcs.chat_status import (
+from SungJinwooRobot.modules.helper_funcs.chat_status import (
     is_user_ban_protected,
     user_admin,
 )
-from Petra.modules.helper_funcs.misc import build_keyboard, revert_buttons
-from Petra.modules.helper_funcs.msg_types import get_welcome_type
-from Petra.modules.helper_funcs.string_handling import (
+from SungJinwooRobot.modules.helper_funcs.misc import build_keyboard, revert_buttons
+from SungJinwooRobot.modules.helper_funcs.msg_types import get_welcome_type
+from SungJinwooRobot.modules.helper_funcs.string_handling import (
     escape_invalid_curly_brackets,
     markdown_parser,
 )
-from Petra.modules.log_channel import loggable
-from Petra.modules.sql.global_bans_sql import is_user_gbanned
+from SungJinwooRobot.modules.log_channel import loggable
+from SungJinwooRobot.modules.sql.global_bans_sql import is_user_gbanned
 from telegram import (
     ChatPermissions,
     InlineKeyboardButton,
