@@ -4,7 +4,7 @@ import re
 from sys import argv
 from typing import Optional
 
-from SungJinwooRobot import (
+from Petra import (
     ALLOW_EXCL,
     CERT_PATH,
     DONATION_LINK,
@@ -25,9 +25,9 @@ from SungJinwooRobot import (
 
 # needed to dynamically load modules
 # NOTE: Module order is not guaranteed, specify that in the config file!
-from SungJinwooRobot.modules import ALL_MODULES
-from SungJinwooRobot.modules.helper_funcs.chat_status import is_user_admin
-from SungJinwooRobot.modules.helper_funcs.misc import paginate_modules
+from Petra.modules import ALL_MODULES
+from Petra.modules.helper_funcs.chat_status import is_user_admin
+from Petra.modules.helper_funcs.misc import paginate_modules
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
 from telegram.error import (
     BadRequest,
@@ -74,39 +74,38 @@ def get_readable_time(seconds: int) -> str:
 
 
 PM_START_TEXT = """
-Hello {}! Nice to meet you! 
-
-I am *Senku Ishigami* , a group management bot based on the anime *Dr Stone*[!](https://telegra.ph/file/879b6a55652d0fbd4463a.jpg)
-
-*Click on the Commands Button below to go through my commands.*
-
+Hello there [!](https://telegra.ph/file/6d601179f7b31e3d5ffab.jpg),Nice to meet you!
+I am **Shimizu Kiyoko** from **Haikyuu**.
+I can help you to manage your groups efficiently!
 """
 
 buttons = [
     [
         InlineKeyboardButton(
-            text=" Add Senku to your Group", url="t.me/Senkubest_bot?startgroup=true"),
+            text="Add Shimizu to your Group", url="https://t.me/shimizukiyokorobot?startgroup=true"),
     ],
     [
-        InlineKeyboardButton(text="❓Help", callback_data="kurumi_"),
-        InlineKeyboardButton(text=" 💬Commands", callback_data="help_back"),
+        InlineKeyboardButton(text="Help", callback_data="kurumi_"),
+
+        InlineKeyboardButton(text="Commands", callback_data="help_back"),
     ],
+
     [
-        InlineKeyboardButton(text="🚨Support Grp", url="https://t.me/myawesomebot21"),
-        InlineKeyboardButton(text="❗Updates", url="https://t.me/senkubotupdates"),
-   
-    ], 
+        InlineKeyboardButton(
+            text="Know Me!", url="https://anilist.co/character/67689"),
+    ],    
+
+
 ]
 
 
 HELP_STRINGS = """
-I am *Senku* from Dr Stone. Welcome to my help menu[!](https://telegra.ph/file/599c521d60b93483debf2.jpg)
-I can help in managing your group using my IQ. This is Exhilarating!
+Yo! I'm Shimizu Kiyoko [!](https://telegra.ph/file/910e023256e4a26067086.jpg)
 Click on the buttons below to know about specific modules.."""
 
 
-KURUMI_IMG = "https://telegra.ph/file/78a95df585a55187568ee.jpg"
-SENKUSTART = "https://telegra.ph/file/c6a6564f8175d9303a61a.mp4"
+PETRA_IMG = "https://telegra.ph/file/43777b0c4e6b21f418ef7.mp4"
+PETRASTART = "https://telegra.ph/file/43777b0c4e6b21f418ef7.mp4"
 
 DONATE_STRING = """Heya, glad to hear you want to donate!
 Click here to donate in [Paypal](https://www.paypal.me/zameeljaz)"""
@@ -122,7 +121,7 @@ CHAT_SETTINGS = {}
 USER_SETTINGS = {}
 
 for module_name in ALL_MODULES:
-    imported_module = importlib.import_module("SungJinwooRobot.modules." + module_name)
+    imported_module = importlib.import_module("Petra.modules." + module_name)
     if not hasattr(imported_module, "__mod_name__"):
         imported_module.__mod_name__ = imported_module.__name__
 
@@ -211,32 +210,20 @@ def start(update: Update, context: CallbackContext):
                 IMPORTED["rules"].send_rules(update, args[0], from_pm=True)
 
         else:
-            first_name = update.effective_user.first_name
             update.effective_message.reply_text(
-                PM_START_TEXT.format(
-                    escape_markdown(first_name)),
+                PM_START_TEXT,
+                reply_markup=InlineKeyboardMarkup(buttons),
                 parse_mode=ParseMode.MARKDOWN,
-                reply_markup=InlineKeyboardMarkup(
-                [
-    [
-        InlineKeyboardButton(
-            text=" Add Senku to your Group✅", url="t.me/Senkubest_bot?startgroup=true"),
-    ],
-    [
-        InlineKeyboardButton(text="Help", callback_data="kurumi_"),
-        InlineKeyboardButton(text=" 💬Commands", callback_data="help_back"),
-    ],
-    [
-        InlineKeyboardButton(text="🚨Support Grp", url="https://t.me/myawesomebot21"),
-        InlineKeyboardButton(text="❗Updates", url="https://t.me/senkubotupdates"),
-   
-   ]]))  
-            
+                timeout=60,
+            )
     else:
+      
         update.effective_message.reply_video(
-            SENKUSTART, caption= "<b>I have been unpetrified since:</b> <code>{}</code> \n<b>This is Exhilarating</b>"
-            .format(uptime),
-            parse_mode=ParseMode.HTML)
+                PETRASTART, caption= "<b>I am awake! Haven't slept Since:</b><code>{}</code>".format(
+                uptime
+            ),
+            parse_mode=ParseMode.HTML,
+        )
 
 
 def error_handler(update, context):
@@ -367,13 +354,13 @@ def kurumi_about_callback(update, context):
     query = update.callback_query
     if query.data == "kurumi_":
         query.message.edit_text(
-            text=""" ℹ️ I'm *Senku*, a powerful group management bot built to help you manage your group easily. 
+            text=""" ℹ️ I'm *Shimizu*, a powerful group management bot built to help you manage your group easily. 
                  \n❍ I can restrict users.
                  \n❍ I can greet users with customizable welcome messages and set group's rules.
                  \n❍ I have an anti-flood system which will stop users from spamming and flooding the group. 
                  \n❍ I can warn users until they reach max warns, with each predefined actions such as ban, mute, kick, etc.
                  \n❍ I have a note keeping system, blacklists, and even predetermined replies on certain keywords.
-                 \n\nIf you have any question about Senku, let us know at @myawesomebot21 .""",
+                 \n\nIf you have any question about Shimizu, let us know at @ShimizuSupport .""",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
@@ -399,8 +386,8 @@ def Source_about_callback(update, context):
     query = update.callback_query
     if query.data == "source_":
         query.message.edit_text(
-            text=""" Hi..🤗 I'm *Senku*
-                 \nHere is the [Source Code](https://github.com/asadali32117/Senku) .""",
+            text=""" Hi.. I'm *Shimizu*
+                 \nHere is the [Source Code](https://github.com/nashekarliyemaineaaj/Petra3) .""",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
@@ -430,7 +417,7 @@ def get_help(update: Update, context: CallbackContext):
         if len(args) >= 2 and any(args[1].lower() == x for x in HELPABLE):
             module = args[1].lower()
             update.effective_message.reply_text(
-                "Contact me in PM to get help of {module.capitalize()}",
+              PETRA_IMG, caption=f"Contact me in PM to get help of {module.capitalize()}",
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
