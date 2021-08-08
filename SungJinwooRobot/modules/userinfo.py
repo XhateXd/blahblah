@@ -14,17 +14,17 @@ from telegram.ext.dispatcher import run_async
 from telegram.error import BadRequest
 from telegram.utils.helpers import escape_markdown, mention_html
 
-from Petra import (DEV_USERS, OWNER_ID, DRAGONS, DEMONS, TIGERS, WOLVES,
+from SungJinwooRobot import (DEV_USERS, OWNER_ID, DRAGONS, DEMONS, TIGERS, WOLVES,
                           INFOPIC, dispatcher, sw)
-from Petra.__main__ import STATS, TOKEN, USER_INFO
-import Petra.modules.sql.userinfo_sql as sql
-from Petra.modules.disable import DisableAbleCommandHandler
-from Petra.modules.sql.global_bans_sql import is_user_gbanned
-from Petra.modules.sql.afk_sql import is_afk, check_afk_status
-from Petra.modules.sql.users_sql import get_user_num_chats
-from Petra.modules.helper_funcs.chat_status import sudo_plus
-from Petra.modules.helper_funcs.extraction import extract_user
-from Petra import telethn as SaitamaTelethonClient, TIGERS, DRAGONS, DEMONS
+from SungJinwooRobot.__main__ import STATS, TOKEN, USER_INFO
+import SungJinwooRobot.modules.sql.userinfo_sql as sql
+from SungJinwooRobot.modules.disable import DisableAbleCommandHandler
+from SungJinwooRobot.modules.sql.global_bans_sql import is_user_gbanned
+from SungJinwooRobot.modules.sql.afk_sql import is_afk, check_afk_status
+from SungJinwooRobot.modules.sql.users_sql import get_user_num_chats
+from SungJinwooRobot.modules.helper_funcs.chat_status import sudo_plus
+from SungJinwooRobot.modules.helper_funcs.extraction import extract_user
+from SungJinwooRobot import telethn as SaitamaTelethonClient, TIGERS, DRAGONS, DEMONS
 
 
 def no_by_per(totalhp, percentage):
