@@ -14,17 +14,17 @@ from telegram.ext.dispatcher import run_async
 from telegram.error import BadRequest
 from telegram.utils.helpers import escape_markdown, mention_html
 
-from SungJinwooRobot import (DEV_USERS, OWNER_ID, DRAGONS, DEMONS, TIGERS, WOLVES,
+from Petra import (DEV_USERS, OWNER_ID, DRAGONS, DEMONS, TIGERS, WOLVES,
                           INFOPIC, dispatcher, sw)
-from SungJinwooRobot.__main__ import STATS, TOKEN, USER_INFO
-import SungJinwooRobot.modules.sql.userinfo_sql as sql
-from SungJinwooRobot.modules.disable import DisableAbleCommandHandler
-from SungJinwooRobot.modules.sql.global_bans_sql import is_user_gbanned
-from SungJinwooRobot.modules.sql.afk_sql import is_afk, check_afk_status
-from SungJinwooRobot.modules.sql.users_sql import get_user_num_chats
-from SungJinwooRobot.modules.helper_funcs.chat_status import sudo_plus
-from SungJinwooRobot.modules.helper_funcs.extraction import extract_user
-from SungJinwooRobot import telethn as SaitamaTelethonClient, TIGERS, DRAGONS, DEMONS
+from Petra.__main__ import STATS, TOKEN, USER_INFO
+import Petra.modules.sql.userinfo_sql as sql
+from Petra.modules.disable import DisableAbleCommandHandler
+from Petra.modules.sql.global_bans_sql import is_user_gbanned
+from Petra.modules.sql.afk_sql import is_afk, check_afk_status
+from Petra.modules.sql.users_sql import get_user_num_chats
+from Petra.modules.helper_funcs.chat_status import sudo_plus
+from Petra.modules.helper_funcs.extraction import extract_user
+from Petra import telethn as SaitamaTelethonClient, TIGERS, DRAGONS, DEMONS
 
 
 def no_by_per(totalhp, percentage):
@@ -271,26 +271,26 @@ def info(update: Update, context: CallbackContext):
     disaster_level_present = False
 
     if user.id == OWNER_ID:
-        text += "\n\nThe Power level of this person is 'Village Founder Senku'."
+        text += "\n\nThe Power level of this person is 'Owner'."
         disaster_level_present = True
     elif user.id in DEV_USERS:
-        text += "\n\nThe Power level of this person is 'Science User Chrome'."
+        text += "\n\nThe Power level of this person is 'Dev'."
         disaster_level_present = True
     elif user.id in DRAGONS:
-        text += "\n\nThe Power level of this person is 'Mentalist Gen'."
+        text += "\n\nThe Power level of this person is 'Dragon'."
         disaster_level_present = True
     elif user.id in DEMONS:
-        text += "\n\nThe Power level of this person is 'Archer Ukyo'."
+        text += "\n\nThe Power level of this person is 'Demon'."
         disaster_level_present = True
     elif user.id in TIGERS:
-        text += "\n\nThe Power level of this person is 'Warrior Ginro'."
+        text += "\n\nThe Power level of this person is 'Tiger'."
         disaster_level_present = True
     elif user.id in WOLVES:
-        text += "\n\nThe Power level of this person is 'Village Guard Kinro'."
+        text += "\n\nThe Power level of this person is 'Wolf'."
         disaster_level_present = True
 
     if disaster_level_present:
-        text += ' [<a href="https://t.me/SenkubotUpdates/4">?</a>]'.format(
+        text += ' [<a href="https://t.me/updatesthikhai/1">?</a>]'.format(
             bot.username)
 
     try:
