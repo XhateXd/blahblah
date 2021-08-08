@@ -4,21 +4,21 @@ import re
 import time
 from functools import partial
 
-import SungJinwooRobot.modules.sql.welcome_sql as sql
-from SungJinwooRobot import (DEV_USERS, LOGGER, OWNER_ID, DRAGONS, DEMONS, TIGERS,
+import Petra.modules.sql.welcome_sql as sql
+from Petra import (DEV_USERS, LOGGER, OWNER_ID, DRAGONS, DEMONS, TIGERS,
                           WOLVES, sw, dispatcher, JOIN_LOGGER)
-from SungJinwooRobot.modules.helper_funcs.chat_status import (
+from Petra.modules.helper_funcs.chat_status import (
     is_user_ban_protected,
     user_admin,
 )
-from SungJinwooRobot.modules.helper_funcs.misc import build_keyboard, revert_buttons
-from SungJinwooRobot.modules.helper_funcs.msg_types import get_welcome_type
-from SungJinwooRobot.modules.helper_funcs.string_handling import (
+from Petra.modules.helper_funcs.misc import build_keyboard, revert_buttons
+from Petra.modules.helper_funcs.msg_types import get_welcome_type
+from Petra.modules.helper_funcs.string_handling import (
     escape_invalid_curly_brackets,
     markdown_parser,
 )
-from SungJinwooRobot.modules.log_channel import loggable
-from SungJinwooRobot.modules.sql.global_bans_sql import is_user_gbanned
+from Petra.modules.log_channel import loggable
+from Petra.modules.sql.global_bans_sql import is_user_gbanned
 from telegram import (
     ChatPermissions,
     InlineKeyboardButton,
@@ -177,7 +177,7 @@ def new_member(update: Update, context: CallbackContext):
             # Give the owner a special welcome
             if new_mem.id == OWNER_ID:
                 update.effective_message.reply_text(
-                    "The Village Founder Senku is here!Bring some coffee.",
+                    "My owner is here!Bring some coffee.",
                     reply_to_message_id=reply)
                 welcome_log = (f"{html.escape(chat.title)}\n"
                                f"#USER_JOINED\n"
@@ -187,7 +187,7 @@ def new_member(update: Update, context: CallbackContext):
             # Welcome Devs
             elif new_mem.id in DEV_USERS:
                 update.effective_message.reply_text(
-                    "Whoa! A user with Disaster Level just joined! Position: Science User Chrome",
+                    "Whoa! A DEV user just joined!",
                     reply_to_message_id=reply,
                 )
                 continue
@@ -195,7 +195,7 @@ def new_member(update: Update, context: CallbackContext):
             # Welcome Sudos
             elif new_mem.id in DRAGONS:
                 update.effective_message.reply_text(
-                    "Huh! A Disaster Level User just joined! Position: Mentalist Gen. Stay Alert!",
+                    "Huh! A Sudo User just joined!Stay Alert!",
                     reply_to_message_id=reply,
                 )
                 continue
@@ -203,7 +203,7 @@ def new_member(update: Update, context: CallbackContext):
             # Welcome Support
             elif new_mem.id in DEMONS:
                 update.effective_message.reply_text(
-                    "Huh! Someone with a Disaster level just joined! Position: Archer Ukyo",
+                    "Huh! Someone with a Disaster level,Demon just joined!",
                     reply_to_message_id=reply,
                 )
                 continue
@@ -211,14 +211,14 @@ def new_member(update: Update, context: CallbackContext):
             # Welcome Whitelisted
             elif new_mem.id in TIGERS:
                 update.effective_message.reply_text(
-                    "Oof! A Disaster Level User just joined! Position: Warrior Kinro",
+                    "Oof! A Disaster Level User just joined!",
                     reply_to_message_id=reply)
                 continue
 
             # Welcome Tigers
             elif new_mem.id in WOLVES:
                 update.effective_message.reply_text(
-                    "Oof! A Disaster Level User just joined! Position: Villagye Guard Ginro",
+                    "Oof! A Disaster Level User just joined!",
                     reply_to_message_id=reply)
                 continue
 
@@ -495,7 +495,7 @@ def left_member(update: Update, context: CallbackContext):
             # Give the devs a special goodbye
             elif left_mem.id in DEV_USERS:
                 update.effective_message.reply_text(
-                    "See you later at Senku Support!",
+                    "See you later at Shimizu Support!",
                     reply_to_message_id=reply,
                 )
                 return
