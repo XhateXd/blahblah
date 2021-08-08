@@ -4,7 +4,7 @@ import re
 import time
 from functools import partial
 
-import SungjinwooRobot.modules.sql.welcome_sql as sql
+import SungJinwooRobot.modules.sql.welcome_sql as sql
 from SungJinwooRobot import (DEV_USERS, LOGGER, OWNER_ID, DRAGONS, DEMONS, TIGERS,
                           WOLVES, sw, dispatcher, JOIN_LOGGER)
 from SungJinwooRobot.modules.helper_funcs.chat_status import (
