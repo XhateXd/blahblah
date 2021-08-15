@@ -77,7 +77,7 @@ PM_START_TEXT = """
 𝖧𝖾𝗅𝗅𝗈 {}! 𝖨’𝗆 𝖲𝗁𝗂𝗆𝗂𝗓𝗎 𝖪𝗂𝗒𝗈𝗄𝗈 𝖿𝗋𝗈𝗆 𝖧𝖺𝗂𝗄𝗒𝗎𝗎. 
 𝖨 𝖼𝖺𝗇 𝗁𝖾𝗅𝗉 𝗒𝗈𝗎 𝗂𝗇 𝗆𝖺𝗂𝗇𝗍𝖺𝗂𝗇𝗂𝗇𝗀 𝗒𝗈𝗎𝗋 𝗀𝗋𝗈𝗎𝗉𝗌 𝖾𝖿𝖿𝗂𝖼𝗂𝖾𝗇𝗍𝗅𝗒! 
 𝖩𝗎𝗌𝗍 𝖺𝖽𝖽 𝗆𝖾 𝖺𝗇𝖽 𝗌𝖾𝖾. 
-☺️✨
+[☺️](https://telegra.ph/file/83ba896fd080a0a7f8ea3.jpg)✨
 """
 
 buttons = [
@@ -212,33 +212,25 @@ def start(update: Update, context: CallbackContext):
 
         else:
             first_name = update.effective_user.first_name
-            update.effective_message.reply_photo(
-                PETRA_IMG,
-                caption=PM_START_TEXT.format(
+            update.effective_message.reply_text(
+                PM_START_TEXT.format(
                     escape_markdown(first_name)),
                 parse_mode=ParseMode.MARKDOWN,
-                disable_web_page_preview=True,
                 reply_markup=InlineKeyboardMarkup(
-                    [[
-                        InlineKeyboardButton(
-                            text="🍃 Add Shimizu To Your Group 🍃",
-                            url="t.me/kiyokoshimizurobot?startgroup=true")
-                    ],
-                     [
-                         InlineKeyboardButton(
-                             text="Help❓",
-                             callback_data="kurumi_"),
-                         InlineKeyboardButton(
-                             text="Commands✨",
-                             callback_data="help_back"),
-              
-                    ],
-                     [
-                        InlineKeyboardButton(
-                             text="Know me 💞",
-                             url="https://anilist.co/character/67689"),                    
-      
-                    ]]))
+                [
+    [
+        InlineKeyboardButton(
+            text=" 🍃 Add Shimizu To Your Group 🍃", url="t.me/kiyokoshimizurobot?startgroup=true"),
+    ],
+    [
+        InlineKeyboardButton(text=" Help❓", callback_data="kurumi_"),
+        InlineKeyboardButton(text=" Commands✨", callback_data="help_back"),
+    ],
+    [
+        InlineKeyboardButton(text="Know me 💞", url="https://anilist.co/character/67689"),
+        InlineKeyboardButton(text="🚨Support Grp", url="https://t.me/Shimizusupport"),
+
+   ]]))  
 
     else:
       
