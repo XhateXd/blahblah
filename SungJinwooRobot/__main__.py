@@ -389,12 +389,25 @@ def kurumi_about_callback(update, context):
         )
     elif query.data == "kurumi_back":
         query.message.edit_text(
-                PM_START_TEXT,
-                reply_markup=InlineKeyboardMarkup(buttons),
+            first_name = update.effective_user.first_name
+                PM_START_TEXT.format(
+                    escape_markdown(first_name)),
                 parse_mode=ParseMode.MARKDOWN,
-                timeout=60,
-                disable_web_page_preview=False,
-        )
+                reply_markup=InlineKeyboardMarkup(
+                [
+    [
+        InlineKeyboardButton(
+            text=" 🍃 Add Shimizu To Your Group 🍃", url="t.me/kiyokoshimizurobot?startgroup=true"),
+    ],
+    [
+        InlineKeyboardButton(text=" Help❓", callback_data="kurumi_"),
+        InlineKeyboardButton(text=" Commands✨", callback_data="help_back"),
+    ],
+    [
+        InlineKeyboardButton(text="Know me 💞", url="https://anilist.co/character/67689"),
+        InlineKeyboardButton(text="🚨Support Grp", url="https://t.me/Shimizusupport"),
+
+   ]]))  
 
 
 @run_async
@@ -416,12 +429,25 @@ def Source_about_callback(update, context):
         )
     elif query.data == "source_back":
         query.message.edit_text(
-                PM_START_TEXT,
-                reply_markup=InlineKeyboardMarkup(buttons),
+            first_name = update.effective_user.first_name
+                PM_START_TEXT.format(
+                    escape_markdown(first_name)),
                 parse_mode=ParseMode.MARKDOWN,
-                timeout=60,
-                disable_web_page_preview=False,
-        )
+                reply_markup=InlineKeyboardMarkup(
+                [
+    [
+        InlineKeyboardButton(
+            text=" 🍃 Add Shimizu To Your Group 🍃", url="t.me/kiyokoshimizurobot?startgroup=true"),
+    ],
+    [
+        InlineKeyboardButton(text=" Help❓", callback_data="kurumi_"),
+        InlineKeyboardButton(text=" Commands✨", callback_data="help_back"),
+    ],
+    [
+        InlineKeyboardButton(text="Know me 💞", url="https://anilist.co/character/67689"),
+        InlineKeyboardButton(text="🚨Support Grp", url="https://t.me/Shimizusupport"),
+
+   ]]))  
 
 @run_async
 def get_help(update: Update, context: CallbackContext):
