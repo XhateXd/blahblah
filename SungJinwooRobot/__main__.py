@@ -212,7 +212,7 @@ def start(update: Update, context: CallbackContext):
 
         else:
             update.effective_message.reply_text(
-                PM_START_TEXT),
+                PM_START_TEXT,
                 parse_mode=ParseMode.MARKDOWN,
                 reply_markup=InlineKeyboardMarkup(
                 [
@@ -387,7 +387,7 @@ def kurumi_about_callback(update, context):
         )
     elif query.data == "kurumi_back":
         query.message.edit_text(
-                PM_START_TEXT),
+                PM_START_TEXT,
                 parse_mode=ParseMode.MARKDOWN,
                 reply_markup=InlineKeyboardMarkup(
                 [
@@ -425,7 +425,7 @@ def Source_about_callback(update, context):
         )
     elif query.data == "source_back":
         query.message.edit_text(
-                PM_START_TEXT),
+                PM_START_TEXT,
                 parse_mode=ParseMode.MARKDOWN,
                 reply_markup=InlineKeyboardMarkup(
                 [
