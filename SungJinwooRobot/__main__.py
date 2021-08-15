@@ -220,20 +220,25 @@ def start(update: Update, context: CallbackContext):
                 disable_web_page_preview=True,
                 reply_markup=InlineKeyboardMarkup(
                     [[
-
-        InlineKeyboardButton(
-            text="🍃 Add Shimizu To Your Group 🍃", url="https://t.me/shimizukiyokorobot?startgroup=true"),
-                     ],
-    [
-        InlineKeyboardButton(text="Help‼️", callback_data="kurumi_"),
-
-        InlineKeyboardButton(text="Commands✨", callback_data="help_back"),
-    ],
-
-    [
-        InlineKeyboardButton(
-            text="Know me 💞", url="https://anilist.co/character/67689"),
-   ]]))
+                        InlineKeyboardButton(
+                            text="🍃 Add Shimizu To Your Group 🍃",
+                            url="t.me/kiyokoshimizurobot?startgroup=true")
+                    ],
+                     [
+                         InlineKeyboardButton(
+                             text="Help❓",
+                             callback_data="kurumi_"),
+                         InlineKeyboardButton(
+                             text="Commands✨",
+                             callback_data="help_back"),
+              
+                    ],
+                     [
+                        InlineKeyboardButton(
+                             text="Know me 💞",
+                             url="https://anilist.co/character/67689"),                    
+      
+                    ]]))
 
     else:
       
