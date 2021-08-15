@@ -74,7 +74,7 @@ def get_readable_time(seconds: int) -> str:
 
 
 PM_START_TEXT = """
-𝖧𝖾𝗅𝗅𝗈 {}! 𝖨’𝗆 𝖲𝗁𝗂𝗆𝗂𝗓𝗎 𝖪𝗂𝗒𝗈𝗄𝗈 𝖿𝗋𝗈𝗆 𝖧𝖺𝗂𝗄𝗒𝗎𝗎. 
+𝖧𝖾𝗅𝗅𝗈! 𝖨’𝗆 𝖲𝗁𝗂𝗆𝗂𝗓𝗎 𝖪𝗂𝗒𝗈𝗄𝗈 𝖿𝗋𝗈𝗆 𝖧𝖺𝗂𝗄𝗒𝗎𝗎. 
 𝖨 𝖼𝖺𝗇 𝗁𝖾𝗅𝗉 𝗒𝗈𝗎 𝗂𝗇 𝗆𝖺𝗂𝗇𝗍𝖺𝗂𝗇𝗂𝗇𝗀 𝗒𝗈𝗎𝗋 𝗀𝗋𝗈𝗎𝗉𝗌 𝖾𝖿𝖿𝗂𝖼𝗂𝖾𝗇𝗍𝗅𝗒! 
 𝖩𝗎𝗌𝗍 𝖺𝖽𝖽 𝗆𝖾 𝖺𝗇𝖽 𝗌𝖾𝖾. 
 [☺️](https://telegra.ph/file/83ba896fd080a0a7f8ea3.jpg)✨
@@ -211,10 +211,8 @@ def start(update: Update, context: CallbackContext):
                 IMPORTED["rules"].send_rules(update, args[0], from_pm=True)
 
         else:
-            first_name = update.effective_user.first_name
             update.effective_message.reply_text(
-                PM_START_TEXT.format(
-                    escape_markdown(first_name)),
+                PM_START_TEXT),
                 parse_mode=ParseMode.MARKDOWN,
                 reply_markup=InlineKeyboardMarkup(
                 [
@@ -389,9 +387,7 @@ def kurumi_about_callback(update, context):
         )
     elif query.data == "kurumi_back":
         query.message.edit_text(
-            first_name = update.effective_user.first_name
-                PM_START_TEXT.format(
-                    escape_markdown(first_name)),
+                PM_START_TEXT),
                 parse_mode=ParseMode.MARKDOWN,
                 reply_markup=InlineKeyboardMarkup(
                 [
@@ -429,9 +425,7 @@ def Source_about_callback(update, context):
         )
     elif query.data == "source_back":
         query.message.edit_text(
-            first_name = update.effective_user.first_name
-                PM_START_TEXT.format(
-                    escape_markdown(first_name)),
+                PM_START_TEXT),
                 parse_mode=ParseMode.MARKDOWN,
                 reply_markup=InlineKeyboardMarkup(
                 [
