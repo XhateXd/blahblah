@@ -16,7 +16,7 @@ from SungJinwooRobot import BOT_ID, BOT_USERNAME
 
 # from SungJinwooRobot import OWNER_ID as SUDO_USERS
 from SungJinwooRobot import pgram
-from SungJinwooRobot.modules.sql import forceSubscribe_sql as sql
+from SungJinwooRobot.modules.sql import forcesubscribe_sql as sql
 
 logging.basicConfig(level=logging.INFO)
 
@@ -175,7 +175,7 @@ def config(client, message):
                     )
                 except UserNotParticipant:
                     message.reply_text(
-                        f"❗ **Not an Admin in the Channel**\n__I am not an admin in the [channel](https://t.me/{input_str}). Add me as a admin in order to enable ForceSubscribe.__",
+                        f"❗ **Not an Admin in the Channel**\n__I am not an admin in the [channel](https://t.me/{input_str}). Add me as a admin in order to enable ForceSubscribe ",
                         disable_web_page_preview=True,
                     )
                 except (UsernameNotOccupied, PeerIdInvalid):
